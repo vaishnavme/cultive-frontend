@@ -1,0 +1,29 @@
+.wallpaper {
+    width: 100%;
+    background-image: url("../../assets/images/wallpaper2-min.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 430px;
+}
+.header {
+    margin: auto auto 2rem;
+    padding: 5rem 1rem;
+    text-align: center;
+    background-color: var(--light-yellow);
+}
+.mainGrid {
+    margin: 2rem auto;
+    padding: 0.5rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.image {
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    border: 5px solid var(--light-yellow);
+    border-radius: 0.5rem;
+}
