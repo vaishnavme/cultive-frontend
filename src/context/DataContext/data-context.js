@@ -15,6 +15,7 @@ const initialState = {
 }
 
 export const DataProvider = ({children}) => {
+    const BASE_URL = "https://cultivateneog.herokuapp.com"
     const { user } = useAuth();
     const { toastDispatch } = useToast();
     const {isLoading, setLoading} = useLoader();
@@ -30,7 +31,7 @@ export const DataProvider = ({children}) => {
     
     // cart server operations
     const addToCartHandler = async ({product}) => {
-        const {data: {success}} = await axios.post(`/cart/${user._id}`, {
+        const {data: {success}} = await axios.post(`${BASE_URL}/cart/${user._id}`, {
             cartItems: {
                 product: product
             }
@@ -44,7 +45,7 @@ export const DataProvider = ({children}) => {
     }
 
     const quantityHandler= async({type, product, quantity}) => {
-        const {data:{success}} = await axios.post(`/cart/${user._id}/${product}`, {
+        const {data:{success}} = await axios.post(`${BASE_URL}/cart/${user._id}/${product}`, {
             quantity: type === "INC_QNT" ? quantity + 1 : quantity - 1
         })
         if(success) {
@@ -55,7 +56,7 @@ export const DataProvider = ({children}) => {
     }
 
     const removeFromCart = async({product}) => {
-        const {data: {success}} = await axios.delete(`/cart/${user._id}/${product}`)
+        const {data: {success}} = await axios.delete(`${BASE_URL}/cart/${user._id}/${product}`)
         if(success) {
             toastDispatch({type:"SUCCESS", payload: "Removed from Cart!"});
             dispatch({type: "REMOVE_FROM_CART", payload: product})
@@ -66,7 +67,7 @@ export const DataProvider = ({children}) => {
 
     // wishlist operations
     const addToWishlist = async({product}) => {
-        const {data: {success}} = await axios.post(`/wishlist/${user._id}`, {
+        const {data: {success}} = await axios.post(`${BASE_URL}/wishlist/${user._id}`, {
             wishlistItems: {
                 product: product
             }
@@ -80,7 +81,7 @@ export const DataProvider = ({children}) => {
     }
 
     const removeFromWishlist = async({product}) => {
-        const {data: {success}} = await axios.delete(`/wishlist/${user._id}/${product}`);
+        const {data: {success}} = await axios.delete(`${BASE_URL}/wishlist/${user._id}/${product}`);
         if(success) {
             toastDispatch({type:"SUCCESS", payload: "Removed to Wishlist!"});
             getWishlistItems();
@@ -93,7 +94,7 @@ export const DataProvider = ({children}) => {
     const getProductData = async() => {
         try {
             setLoading(true);
-            const {data: {product}} = await axios.get(`/products`);
+            const {data: {product}} = await axios.get(`${BASE_URL}/products`);
             dispatch({type: "SET_DATA", payload: product});
             setLoading(false);
         } catch(err) {
@@ -107,7 +108,7 @@ export const DataProvider = ({children}) => {
         if(user) {
             try {
                 setLoading(true);
-                const  { data:{cart} } = await axios.get(`/cart/${user._id}`);
+                const  { data:{cart} } = await axios.get(`${BASE_URL}/cart/${user._id}`);
                 const userCart = cart.cartItems;
                 const userCartItems = userCart.map((item) => {
                     return { ...item.product, quantity: item.quantity };
@@ -126,7 +127,7 @@ export const DataProvider = ({children}) => {
         if(user) {
             try {
                 setLoading(true);
-                const  { data:{wishlist} } = await axios.get(`/wishlist/${user._id}`); 
+                const  { data:{wishlist} } = await axios.get(`${BASE_URL}/wishlist/${user._id}`); 
                 const userWishlist = wishlist.wishlistItems;
                 const userWishlistItems = userWishlist.map((item) => item.product)         
                 dispatch({type: "SET_WISHLIST", payload: userWishlistItems})
