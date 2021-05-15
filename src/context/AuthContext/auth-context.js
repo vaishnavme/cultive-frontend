@@ -4,6 +4,7 @@ import axios from "axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
+    const BASE_URL = "https://cultivateneog.herokuapp.com"
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem("authUser"))
     )
@@ -11,7 +12,7 @@ export const AuthProvider = ({children}) => {
     const loginCredentialHandler = async (email, password) => {
         console.log("ema", email)
         try {
-            const { data: {data, success} } = await axios.post("user/login", {
+            const { data: {data, success} } = await axios.post(`${BASE_URL}/user/login`, {
                 email,
                 password
             })
