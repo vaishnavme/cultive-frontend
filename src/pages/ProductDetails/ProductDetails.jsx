@@ -4,9 +4,9 @@ import { useData, useAuth } from "../../context";
 import axios from "axios";
 import * as AIicons from "react-icons/ai";
 import { checkIn, Loader, Modal } from "../../components";
-import styles from "./ProductDetail.module.css";
+import styles from "./ProductDetails.module.css";
 
-export default function ProductDetail() {
+export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
     const { cartItems, wishListItems, addToCartHandler, addToWishlist, removeFromWishlist, isLoading, setLoading } = useData();
