@@ -18,7 +18,7 @@ export default function ProductDetails() {
         (async () => {
             try {
                 setLoading(true)
-                const {data: {product}} = await axios.get(`/products/${id}`)
+                const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${id}`)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
