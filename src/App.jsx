@@ -4,8 +4,6 @@ import { useToast } from "./context";
 import { Navbar, Toast } from "./components";
 import { PrivateRoute } from "./api";
 
-import './App.css';
-
 function App() {
   const { toastBox } = useToast();
   return (
