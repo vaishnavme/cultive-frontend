@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useData } from "../../context";
 import { ProductCard, FilterBox, onlyUnique, Loader } from "../../components";
-import * as AIicons from "react-icons/ai";
 import styles from "./Products.module.css";
 
 export default function Products() {
@@ -45,7 +44,7 @@ export default function Products() {
         <button 
             onClick={filterHandler}
             className={`btn iconBtn ${styles.filterBtn}`}>
-            <AIicons.AiOutlineFilter/>Filter
+            <i class='bx bx-filter-alt' ></i>Filter
         </button>
            <div>
            { showFilter &&

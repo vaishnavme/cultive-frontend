@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useData } from "../../context";
-import * as AIicons from "react-icons/ai";
 import styles from "./Cart.module.css";
 
 export default function Cart() {
@@ -47,7 +46,7 @@ export default function Cart() {
                                                 product: item._id,
                                                 quantity: item.quantity
                                             })}>
-                                                <AIicons.AiOutlineMinus/>
+                                                <i class='bx bx-minus' ></i>
                                         </button>
                                         <div className={`h6`}>Quantity: {item.quantity}</div>
                                         <button 
@@ -57,7 +56,7 @@ export default function Cart() {
                                                 product: item._id,
                                                 quantity: item.quantity
                                             })}>
-                                                <AIicons.AiOutlinePlus/>
+                                                <i class='bx bx-plus' ></i>
                                         </button>
                                     </div>
 

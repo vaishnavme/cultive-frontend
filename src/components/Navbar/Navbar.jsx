@@ -1,6 +1,5 @@
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context";
-import * as AIicons from "react-icons/ai";
 import styles from "./Navbar.module.css";
 
 export const Navbar = () => {
@@ -17,23 +16,23 @@ export const Navbar = () => {
             </div>
             <div className={`${styles.navItem}`}>
                 <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>
-                    <AIicons.AiOutlineHome/>
+                    <i class='bx bx-home'></i>
                     <span className={`${styles.linkName}`}>HOME</span>
                 </NavLink>
                 <NavLink to="/products" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineShop/>
+                    <i class='bx bx-store'></i>
                     <span className={`${styles.linkName}`}>SHOP</span>
                 </NavLink>
                 <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineShoppingCart/>
+                    <i class='bx bx-shopping-bag'></i>
                     <span className={`${styles.linkName}`}>CART</span>
                 </NavLink>
                 <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineHeart/>
+                    <i class='bx bx-bookmark-heart' ></i>
                     <span className={`${styles.linkName}`}>WISHLIST</span>
                 </NavLink>
                 <NavLink to={user ? "/account" : "/login"} activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineUser/>
+                    <i class='bx bx-user'></i>
                     <span className={`${styles.linkName}`}>{user ? "ACCOUNT" : "LOGIN"}</span>
                 </NavLink>
             </div>
@@ -45,26 +44,26 @@ export const Navbar = () => {
             </div>
             <div className={`${styles.navItem}`}>
                 <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineShoppingCart/>
+                    <i class='bx bx-shopping-bag'></i>
                     <span className={`${styles.linkName}`}>CART</span>
                 </NavLink>
                 <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineHeart/>
+                    <i class='bx bx-bookmark-heart' ></i>
                     <span className={`${styles.linkName}`}>WISHLIST</span>
                 </NavLink>
             </div>
         </nav>
             <div className={`${styles.navItem} ${styles.bottomNav}`}>
                 <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>
-                    <AIicons.AiOutlineHome/>
+                    <i class='bx bx-home'></i>
                     <span className={`${styles.linkName}`}>HOME</span>
                 </NavLink>
                 <NavLink to="/products" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineShop/>
+                    <i class='bx bx-store'></i>
                     <span className={`${styles.linkName}`}>SHOP</span>
                 </NavLink>
                 <NavLink to={user ? "/account" : "/login"} activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <AIicons.AiOutlineUser/>
+                    <i class='bx bx-user' ></i>
                     <span className={`${styles.linkName}`}>{user ? "ACCOUNT" : "LOGIN"}</span>
                 </NavLink>
             </div>

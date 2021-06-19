@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useData, useAuth } from "../../context";
 import axios from "axios";
-import * as AIicons from "react-icons/ai";
 import { checkIn, Loader, Modal } from "../../components";
 import styles from "./ProductDetails.module.css";
 
@@ -91,7 +90,7 @@ export default function ProductDetails() {
                         <div className={`d-flex`}>
                             <button className={`btn ${styles.btnSecondary}`}
                                 onClick={() => wishBtnHandler(product._id)}>
-                            {checkIn(wishListItems, product._id) ? <AIicons.AiFillHeart className={`${styles.fillWishlist}`}/> : <AIicons.AiOutlineHeart/>}
+                                {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i class='bx bx-heart' ></i>}
                             </button>
                             <button 
                                 disabled={product.inStock ? false : true}

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useData, useAuth } from "../../context";
-import * as AIicons from "react-icons/ai";
 import { checkIn, Modal } from "../index";
 import styles from "./ProductCard.module.css";
 
@@ -39,7 +38,8 @@ export const ProductCard = ({product}) => {
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
                     onClick={() => wishBtnHandler(product._id)}>
-                    {checkIn(wishListItems, product._id) ? <AIicons.AiFillHeart className={`${styles.fillWishlist}`}/> : <AIicons.AiOutlineHeart/>}                </button>
+                    {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i class='bx bx-heart' ></i>}                
+                </button>
             </div>
         </div>
         </>
