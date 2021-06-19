@@ -11,7 +11,6 @@ export const Navbar = () => {
         setVisible((prevState) => !prevState);
     }
     const activeStyle = {
-            fontWeight: 500,
             color: "#00bbf9",
         }
 
