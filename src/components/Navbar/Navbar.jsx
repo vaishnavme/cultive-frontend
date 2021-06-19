@@ -52,13 +52,28 @@ export const Navbar = () => {
                             </li>
     
                             <li className={`${styles.navItem} ${styles.dropdown}`}>
-                                <NavLink to="/login" activeStyle={activeStyle} className={`${styles.navLink} ${styles.dropdownLink}`}>Login <i className={`bx bx-chevron-down ${styles.dropdownIcon}`}></i></NavLink>
+                                <span className={`${styles.dropdownName}`}>Login <i className={`bx bx-chevron-down ${styles.dropdownIcon}`}></i></span>
                                     
                                 <ul className={`${styles.dropdownMenu}`}>
-                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Account</NavLink></li>
-                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Order</NavLink></li>
-                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Wishlist</NavLink></li>
-                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Log Out</NavLink></li>
+                                    <li className={`${styles.dropdownItem} btn btn-secondary text-center`}>
+                                        <NavLink to="/login" className={`${styles.navLink}`}> Log In</NavLink>
+                                    </li>
+
+                                    <li className={`${styles.dropdownItem} ${styles.borderTop}`}>
+                                        <NavLink to="/account" className={`${styles.navLink}`}><i className='bx bx-user'></i> Account</NavLink>
+                                    </li>
+                                    <li className={`${styles.dropdownItem}`}>
+                                        <NavLink to="/cart" className={`${styles.navLink}`}><i className='bx bx-cart' ></i> Order</NavLink>
+                                    </li>
+                                    <li className={`${styles.dropdownItem}`}>
+                                        <NavLink to="/wishlist" className={`${styles.navLink}`}><i className='bx bx-shopping-bag' ></i> Wishlist</NavLink>
+                                    </li>
+                                    <li className={`${styles.dropdownItem} ${styles.borderTop}`}>
+                                       { user ? (
+                                            <div className={`${styles.navLink}`}><i className='bx bx-log-out' ></i> Log Out </div>
+                                        ) :
+                                        <NavLink to="/signup" className={`${styles.navLink}`}><i className='bx bx-log-in' ></i> Sign Up</NavLink>}
+                                    </li>
                                 </ul>
                             </li>
     
