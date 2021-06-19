@@ -1,72 +1,71 @@
+import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useAuth } from "../../context";
 import styles from "./Navbar.module.css";
 
 export const Navbar = () => {
     const { user } = useAuth();
-    const activeStyle = {
-        fontWeight: 500,
-        color: "#000000",
-    }
-    return (
-        <>
-        <nav className={`${styles.navbar}`}>
-            <div className={`${styles.brand} h2`}>
-                <Link to="/">Cultive</Link>
-            </div>
-            <div className={`${styles.navItem}`}>
-                <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>
-                    <i class='bx bx-home'></i>
-                    <span className={`${styles.linkName}`}>HOME</span>
-                </NavLink>
-                <NavLink to="/products" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-store'></i>
-                    <span className={`${styles.linkName}`}>SHOP</span>
-                </NavLink>
-                <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-shopping-bag'></i>
-                    <span className={`${styles.linkName}`}>CART</span>
-                </NavLink>
-                <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-bookmark-heart' ></i>
-                    <span className={`${styles.linkName}`}>WISHLIST</span>
-                </NavLink>
-                <NavLink to={user ? "/account" : "/login"} activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-user'></i>
-                    <span className={`${styles.linkName}`}>{user ? "ACCOUNT" : "LOGIN"}</span>
-                </NavLink>
-            </div>
-        </nav>
+    const [isVisible, setVisible] = useState(false);
 
-        <nav className={`${styles.mobileNav}`}>
-            <div className={`${styles.brand} h2`}>
-                <Link to="/">Cultive</Link>
+    const setNavVisible = () => {
+        setVisible((prevState) => !prevState);
+    }
+    const activeStyle = {
+            fontWeight: 500,
+            color: "#00bbf9",
+        }
+
+    return (
+        <header className={`${styles.header}`}>
+            <Link to="/" className={`${styles.headerLogo}`}>GardnUp</Link>
+            <div className={`${styles.headerLinks}`}>
+                <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.headerItem}`}>
+                    <i className='bx bx-cart'></i>
+                </NavLink>
+                <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.headerItem}`}>
+                    <i className='bx bx-shopping-bag'></i>
+                </NavLink>
+                <i onClick={() => setNavVisible()} className={`bx bx-menu ${styles.headerToggle}`}></i>
             </div>
-            <div className={`${styles.navItem}`}>
-                <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-shopping-bag'></i>
-                    <span className={`${styles.linkName}`}>CART</span>
-                </NavLink>
-                <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-bookmark-heart' ></i>
-                    <span className={`${styles.linkName}`}>WISHLIST</span>
-                </NavLink>
-            </div>
-        </nav>
-            <div className={`${styles.navItem} ${styles.bottomNav}`}>
-                <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>
-                    <i class='bx bx-home'></i>
-                    <span className={`${styles.linkName}`}>HOME</span>
-                </NavLink>
-                <NavLink to="/products" activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-store'></i>
-                    <span className={`${styles.linkName}`}>SHOP</span>
-                </NavLink>
-                <NavLink to={user ? "/account" : "/login"} activeStyle={activeStyle} className={`${styles.navLink}`}>
-                    <i class='bx bx-user' ></i>
-                    <span className={`${styles.linkName}`}>{user ? "ACCOUNT" : "LOGIN"}</span>
-                </NavLink>
-            </div>
-        </> 
+
+            <nav className={`${styles.nav} ${isVisible && styles.show}`}>
+                <div className={`${styles.navContent} `}>
+                    <Link to="/" className={`${styles.navPerfil}`}>
+                        <div className={`${styles.navBrand}`}>
+                            GradnUp
+                        </div>
+                    </Link>
+    
+                    <div className={`${styles.navMenu}`}>
+                        <ul className={`${styles.navList}`}>
+
+                            <li className={`${styles.navItem}`}>
+                                <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>Home</NavLink>
+                            </li>
+
+                            <li className={`${styles.navItem}`}>
+                                <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>Cart</NavLink>
+                            </li>
+
+                            <li className={`${styles.navItem}`}>
+                                <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.navLink}`}>Wishlist</NavLink>
+                            </li>
+    
+                            <li className={`${styles.navItem} ${styles.dropdown}`}>
+                                <NavLink to="/login" activeStyle={activeStyle} className={`${styles.navLink} ${styles.dropdownLink}`}>Login <i className={`bx bx-chevron-down ${styles.dropdownIcon}`}></i></NavLink>
+                                    
+                                <ul className={`${styles.dropdownMenu}`}>
+                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Account</NavLink></li>
+                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Order</NavLink></li>
+                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Wishlist</NavLink></li>
+                                    <li className={`${styles.dropdownItem}`}><NavLink to="/" className={`${styles.navLink}`}>Log Out</NavLink></li>
+                                </ul>
+                            </li>
+    
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
     )
 }
