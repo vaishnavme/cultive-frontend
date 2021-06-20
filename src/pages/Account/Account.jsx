@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { useAuth, useData } from "../../context";
+import { useAuth } from "../../context";
 import styles from "./Account.module.css";
 
 export default function Login() {
-    const { user, logOutUser } = useAuth();
-    const { cartItems, wishListItems } = useData();
+    const { user } = useAuth();
     const [visible, setVisible] = useState(false);
 
     const setPasswordFieldVisible = () => setVisible((prevState) => !prevState)
-    
     
     return (
         <section className={`${styles.wrapper}`}>
@@ -20,10 +18,10 @@ export default function Login() {
                     <p>Welcome to account setting. You can update your <br/> account details here.</p>
                     <div className={`mt-2 mb-2`}>
                         <label className={`${styles.label}`}>Your Name</label>
-                        <input className={`${styles.inputField} mb-2`} type="text" value={user.name}/>
+                        <input className={`${styles.inputField} mb-2`} type="text" defaultValue={user.name}/>
                         
                         <label className={`${styles.label}`}>Your Email</label>
-                        <input className={`${styles.inputField} mb-4`} type="text" value={user.email}/>
+                        <input className={`${styles.inputField} mb-4`} type="text" defaultValue={user.email}/>
 
                         {
                             visible && 

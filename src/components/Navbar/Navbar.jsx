@@ -51,7 +51,7 @@ export const Navbar = () => {
                             </li>
     
                             <li className={`${styles.navItem} ${styles.dropdown}`}>
-                                <span className={`${styles.dropdownName}`}>Login <i className={`bx bx-chevron-down ${styles.dropdownIcon}`}></i></span>
+                                <span className={`${styles.dropdownName}`}>{user ? "Account" : "Login"} <i className={`bx bx-chevron-down ${styles.dropdownIcon}`}></i></span>
                                     
                                 <ul className={`${styles.dropdownMenu}`}>
                                     {user ? null : <li className={`${styles.dropdownItem} btn btn-secondary text-center`}>
