@@ -14,22 +14,23 @@
 .carouselBtn {
     position: absolute;
     top: 50%;
-    font-size: 2rem;
+    font-size: 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     z-index: 10;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 .carouselBtn:hover {
     color: var(--white);
     background-color: var(--heighlight);
 }
 .right {
-    right: 2rem;
+    right: 1rem;
 }
 .left {
-    left: 2rem;
+    left: 1rem;
 }
 .slide {
     opacity: 0;
