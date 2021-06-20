@@ -1,31 +1,55 @@
-import { useAuth } from "../../context";
+import { useState } from "react";
+import { useAuth, useData } from "../../context";
 import styles from "./Account.module.css";
 
 export default function Login() {
     const { user, logOutUser } = useAuth();
+    const { cartItems, wishListItems } = useData();
+    const [visible, setVisible] = useState(false);
+
+    const setPasswordFieldVisible = () => setVisible((prevState) => !prevState)
+    
     
     return (
-        <div className={`${styles.main}`}>
-            <div className={`${styles.card} p-2`}>
+        <section className={`${styles.wrapper}`}>
+            <div className={`${styles.formSection}`}>
                 <div className={`${styles.header}`}>
-                    <h6>Hi there👋</h6>
-                    <h4><span className={`f-warning`}>{user.name}</span></h4>                 
+                    <h5>Hi {user.name}</h5>
                 </div>
-                <div className={`${styles.body}`}>
-                    <form>
-                        <div className={`styled-input`}>
-                            <input
-                                value={user.email}
-                                type="email" 
-                                readOnly 
-                                placeholder="Enter your email" 
-                                required/>
-                            <span></span>
+                <div className={`mt-2 mb-2`}>
+                    <p>Welcome to account setting. You can update your <br/> account details here.</p>
+                    <div className={`mt-2 mb-2`}>
+                        <label className={`${styles.label}`}>Your Name</label>
+                        <input className={`${styles.inputField} mb-2`} type="text" value={user.name}/>
+                        
+                        <label className={`${styles.label}`}>Your Email</label>
+                        <input className={`${styles.inputField} mb-4`} type="text" value={user.email}/>
+
+                        {
+                            visible && 
+                            <div>
+                                <label className={`${styles.label}`}>New Password</label>
+                                <input 
+                                    className={`${styles.inputField} mb-2`} 
+                                    type="password" 
+                                    placeholder="New Password"
+                                />
+
+                                <label className={`${styles.label}`}>Confirm Password</label>
+                                <input 
+                                    className={`${styles.inputField} mb-4`} 
+                                    type="password" 
+                                    placeholder="Confirm Password"
+                                />
                         </div>
-                    </form>
-                    <button className={`btn btn-secondary`} onClick={() => logOutUser()}>Log Out</button>
+                        }
+
+                        <button className={`btn btn-primary ${styles.btnSave}`}>Save</button>
+                        <button onClick={() => setPasswordFieldVisible()} className={`btn btn-secondary`}>{visible ? "Cancel" : "Change Password"}</button>
+                    </div>
                 </div>
             </div>
-        </div>
+            
+        </section>
     )
 }
