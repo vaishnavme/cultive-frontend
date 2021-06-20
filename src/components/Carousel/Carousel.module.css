@@ -1,0 +1,38 @@
+.carousel {
+    position: relative;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.slideImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+.carouselBtn {
+    position: absolute;
+    top: 50%;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.5rem;
+}
+.carouselBtn:hover {
+    color: var(--white);
+    background-color: var(--heighlight);
+}
+.right {
+    right: 2rem;
+}
+.left {
+    left: 2rem;
+}
+.slide {
+    opacity: 1;
+    transition: ease-in-out 1s;
+}
+.activeSlide {
+    transition-duration: 1s;
+}
