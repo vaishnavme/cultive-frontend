@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import  {carouseldata} from "./carouselData";
 import styles from "./Carousel.module.css";
 
@@ -32,16 +32,16 @@ export const Carousel = () => {
                         key={index}
                         className={index === currentSlide ? `${styles.activeSlide}` : `${styles.setCurrentSlide}`}>
                         { index === currentSlide &&
-                           <>
+                           <Fragment>
                             <img 
-                            className={`${styles.slideImage}`} 
-                            src={slide.imageUrl} 
-                            alt={`slide-${index}`}
-                        />
-                        <div className={`${styles.slideText}`}>
-                            <p className={`${styles.tagline}`}>{slide.tagline}</p>
-                        </div>
-                           </>
+                                className={`${styles.slideImage}`} 
+                                src={slide.imageUrl} 
+                                alt={`slide-${index}`}
+                            />
+                            <div className={`${styles.slideText}`}>
+                                <p className={`${styles.tagline}`}>{slide.tagline}</p>
+                            </div>
+                           </Fragment>
                         }
                     </div>
                 ))
