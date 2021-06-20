@@ -30,13 +30,19 @@ export const Carousel = () => {
                 carouseldata.map((slide, index) => (
                     <div 
                         key={index}
-                        className={`${index} === ${currentSlide} ? ${styles.activeSlide} : ${styles.slide}`}>
+                        className={index === currentSlide ? `${styles.activeSlide}` : `${styles.setCurrentSlide}`}>
                         { index === currentSlide &&
+                           <>
                             <img 
                             className={`${styles.slideImage}`} 
                             src={slide.imageUrl} 
                             alt={`slide-${index}`}
-                        />}
+                        />
+                        <div className={`${styles.slideText}`}>
+                            <p className={`${styles.tagline}`}>{slide.tagline}</p>
+                        </div>
+                           </>
+                        }
                     </div>
                 ))
             }
