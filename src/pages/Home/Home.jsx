@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Carousel } from "../../components";
+import { Carousel, Footer } from "../../components";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -20,6 +20,8 @@ export default function Home() {
                         alt="indoor"/>
                 </div>
             </section>
+
+            <Footer/>
         </Fragment>
     )
 }
