@@ -11,7 +11,7 @@ export const Navbar = () => {
         setVisible((prevState) => !prevState);
     }
     const activeStyle = {
-            color: "#00bbf9",
+            color: "#65c728",
         }
 
     return (
