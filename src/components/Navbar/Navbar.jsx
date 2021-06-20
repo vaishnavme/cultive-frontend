@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { useAuth } from "../../context";
+import { useAuth, useData } from "../../context";
 import styles from "./Navbar.module.css";
 
 export const Navbar = () => {
     const { user } = useAuth();
+    const { cartItems, wishListItems } = useData();
     const [isVisible, setVisible] = useState(false);
 
     const setNavVisible = () => {
@@ -24,7 +25,7 @@ export const Navbar = () => {
                 <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.headerItem}`}>
                     <i className='bx bx-shopping-bag'></i>
                 </NavLink>
-                <i onClick={() => setNavVisible()} className={`bx bx-menu ${styles.headerToggle}`}></i>
+                <i onClick={() => setNavVisible()} className={`bx bx-${isVisible ? "x" : "menu"} ${styles.headerToggle}`}></i>
             </div>
 
             <nav className={`${styles.nav} ${isVisible && styles.show}`}>
@@ -36,7 +37,7 @@ export const Navbar = () => {
                     </Link>
     
                     <div className={`${styles.navMenu}`}>
-                        <ul className={`${styles.navList}`}>
+                        <ul onClick={() => setNavVisible()} className={`${styles.navList}`}>
 
                             <li className={`${styles.navItem}`}>
                                 <NavLink to="/" activeStyle={activeStyle} className={`${styles.navLink}`} end>Home</NavLink>
@@ -59,13 +60,19 @@ export const Navbar = () => {
                                     </li>}
 
                                     <li className={`${styles.dropdownItem} ${styles.borderTop}`}>
-                                        <NavLink to="/account" className={`${styles.navLink}`}><i className='bx bx-user'></i> Account</NavLink>
+                                        <NavLink to="/account" className={`${styles.navLink}`}>
+                                            <i className='bx bx-user'></i> Account
+                                        </NavLink>
                                     </li>
                                     <li className={`${styles.dropdownItem}`}>
-                                        <NavLink to="/cart" className={`${styles.navLink}`}><i className='bx bx-cart' ></i> Order</NavLink>
+                                        <NavLink to="/cart" className={`${styles.navLink}`}>
+                                            <i className='bx bx-cart' ></i> Order <span className="f-warning">({cartItems.length})</span>
+                                        </NavLink>
                                     </li>
                                     <li className={`${styles.dropdownItem}`}>
-                                        <NavLink to="/wishlist" className={`${styles.navLink}`}><i className='bx bx-shopping-bag' ></i> Wishlist</NavLink>
+                                        <NavLink to="/wishlist" className={`${styles.navLink}`}>
+                                            <i className='bx bx-shopping-bag' ></i> Wishlist <span className="f-warning">({wishListItems.length})</span>
+                                        </NavLink>
                                     </li>
                                     <li className={`${styles.dropdownItem} ${styles.borderTop}`}>
                                        { user ? (

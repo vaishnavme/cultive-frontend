@@ -45,6 +45,9 @@
   .navMenu {
     padding: 0 1.5rem;
   }
+  .dropdown > .dropdownMenu {
+    display: block;
+  }
 } 
 .navContent {
   display: flex;
