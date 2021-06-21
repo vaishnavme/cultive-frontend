@@ -56,7 +56,6 @@ export const Footer = () => {
                     <div className={`${styles.formGroup}`}>
                         <div>
                             <input className={`${styles.inputField}`} type="email" placeholder="Email Address" required/>
-                            <span></span>
                         </div>
                         <button className={`${styles.btnSub}`}>SUBSCRIBE</button>
                     </div>
