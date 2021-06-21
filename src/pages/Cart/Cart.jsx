@@ -16,8 +16,6 @@ export default function Cart() {
         dispatch({type: "REMOVE_FROM_CART", payload: productID})
     }
 
-    console.log("cartItems: ", cartItems)
-
     return (
         <section className={`${styles.cartSection}`}>
             {
@@ -44,19 +42,19 @@ export default function Cart() {
                                                     <div className={`${styles.productQuantity}`}>
                                                         <button 
                                                             onClick={() => quantityHandler({
-                                                            type: "INC_QNT",product: item._id, quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i class='bx bx-plus'></i></button>
+                                                            type: "INC_QNT",product: item._id, quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i className='bx bx-plus'></i></button>
                                                         <span className={`ml-2 mr-2 h6`}>{item.quantity}</span>
                                                         <button 
                                                             disabled={item.quantity < 2 ? true : false} 
                                                             onClick={() => quantityHandler({
-                                                            type: "DEC_QNT",product: item._id,quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i class='bx bx-minus' ></i></button>
+                                                            type: "DEC_QNT",product: item._id,quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i className='bx bx-minus' ></i></button>
                                                     </div>
                                                     <div className={`${styles.productPrice} h6`}>
                                                         {item.price} ₹
                                                     </div>
                                                     <div className={`${styles.productAction}`}>
-                                                        <button onClick={() => wishBtnHandler(item._id)} className={`btn ${styles.btnIcon}`}><i class='bx bx-heart'></i></button>
-                                                        <button onClick={() => removeFromCart({product: item._id})} className={`btn ${styles.btnIcon}`}><i class='bx bx-x'></i></button>
+                                                        <button onClick={() => wishBtnHandler(item._id)} className={`btn ${styles.btnIcon}`}><i className='bx bx-heart'></i></button>
+                                                        <button onClick={() => removeFromCart({product: item._id})} className={`btn ${styles.btnIcon}`}><i className='bx bx-x'></i></button>
                                                     </div>
                                                 </div>
                                             </li>
@@ -68,8 +66,8 @@ export default function Cart() {
                                 <div className={`${styles.cardCheck}`}>
                                     <label className={`${styles.lableName}`}>Payment Type</label>
                                     <div className={`${styles.select}`}>
-                                        <div className={`${styles.btnSelect}`} role="button"><i class='bx bxl-visa' ></i></div>
-                                        <div className={`${styles.btnSelect}`}><i class='bx bxl-paypal' ></i></div>
+                                        <div className={`${styles.btnSelect}`} role="button"><i className='bx bxl-visa' ></i></div>
+                                        <div className={`${styles.btnSelect}`}><i className='bx bxl-paypal' ></i></div>
                                     </div>
 
                                     <div className={`${styles.formGroup} mt-2`}>
@@ -105,7 +103,7 @@ export default function Cart() {
                                     </div>
                                     <button className={`${styles.btnBlock}`}>
                                         <div>{cartTotal}</div>
-                                        <div className={`d-flex flex-align-center`}>Checkout <i class='bx bxs-right-arrow-alt h5' ></i></div>
+                                        <div className={`d-flex flex-align-center`}>Checkout <i className='bx bxs-right-arrow-alt h5' ></i></div>
                                     </button>
                                 </div>
                             </div>
