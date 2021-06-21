@@ -20,7 +20,6 @@ export default function Home() {
                         alt="indoor"/>
                 </div>
             </section>
-
             <Footer/>
         </Fragment>
     )
