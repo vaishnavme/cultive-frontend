@@ -25,7 +25,7 @@ export const Navbar = () => {
                 <NavLink to="/wishlist" activeStyle={activeStyle} className={`${styles.headerItem}`}>
                     <i className='bx bx-shopping-bag'></i>
                 </NavLink>
-                <i onClick={() => setNavVisible()} className={`bx bx-${isVisible ? "x" : "menu"} ${styles.headerToggle}`}></i>
+                <i onClick={() => setNavVisible()} className={`bx bx-${isVisible ? "x" : "menu-alt-right"} ${styles.headerToggle}`}></i>
             </div>
 
             <nav className={`${styles.nav} ${isVisible && styles.show}`}>

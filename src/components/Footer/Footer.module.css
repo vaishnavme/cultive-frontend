@@ -67,6 +67,7 @@
     .footer{
         align-items: flex-start;
         flex-direction: column;
+        margin: 1rem;
     }
     .siteMenu {
         margin: 1rem 0;
