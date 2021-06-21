@@ -1,52 +1,187 @@
-.notify {
-    display: block;
-    margin: 1rem auto;
-    text-align: center;
-}
-.main {
-    max-width: 1200px;
-    margin: 1rem auto;
+.centerBlock {
+    max-width: 18rem;
+    height: 50vh;
+    margin: 2rem auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
-.cart {
-    max-width: 50%;
-    flex: 1;
+.cartSection {
+    margin: 5rem auto 1rem;
+    padding: 1rem;
+    max-width: 82%;
+}
+.cartItems {
+    padding: 1rem;
+    grid-area: cartItems;
     border: 1px solid var(--border);
 }
 .checkout {
-    padding: 1rem;
-    margin-left: 1rem;
-    flex: 1;
-    border: 1px solid var(--border);
+    grid-area: checkout;
 }
-.item {
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    grid-template-areas: 
+    "cartItems cartItems checkout";
+}
+.productList {
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: var(--box-shadow);
+}
+.product {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 0.5rem;
+    grid-template-areas: 
+    "info info quantity price action";
+}
+.productInfo {
+    grid-area: info;
+    display: flex;
+}
+.productQuantity {
+    grid-area: quantity;
+}
+.productPrice {
+    grid-area: price;
+}
+.ProductAction {
+    grid-area: action;
+}
+.productQuantity, .productPrice, .productAction {
+    display: flex;
+    align-items: center;
+}
+.productImage {
     width: 100%;
+    max-width: 5rem;
+    height: auto;
+    justify-self: flex-start;
 }
-.listItem {
+.btnIcon {
+    font-size: 1.1rem;
+}
+.cardCheck {
+    padding: 1rem;
+    min-height: 30rem;
+    border-radius: 0.2rem;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.lableName {
+    font-size: 0.7rem;
+    color: var(--gray);
+    font-weight: 600;
+}
+.select {
+    display: flex;
+    justify-content: space-between;
+}
+.btnSelect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    width: 10rem;
+    max-width: 10rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--border);
+    cursor: pointer;
+}
+.btnSelect:active, .btnSelect:focus, 
+.inputField:active, .inputField:focus {
+    border: 1px solid var(--heighlight);
+}
+.formGroup {
     border-bottom: 1px solid var(--border);
 }
-.itemImage {
-    max-width: 10rem;
-    height: auto;
+.formGroup input {
+    display: block;
 }
-.bill {
-    border-top: 1px solid var(--border);
+.inputField {
+    padding: 0.6rem;
+    border-radius: 0.2rem;
+    border: 1px solid var(--border);
+    font-family: inherit;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
 }
-.actionBtn {
-    font-size: 14px;
-    font-weight: 500;
+.inputFieldBlock {
+    width: 100%;
 }
-@media screen and (max-width: 768px){
-    .main {
+.inputField::placeholder {
+    font-family: inherit;
+    letter-spacing: 1px;
+}
+.cardDetails {
+    display: flex;
+    padding: 1rem 0;
+}
+.billing {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    grid-template-areas: 
+    "label num";
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.billingLabel {
+    grid-area: label;
+}
+.billingTotal {
+    grid-area: num;
+    text-align: right;
+}
+.btnBlock {
+    margin-top: 2rem;
+    display: flex;
+    width: 100%;
+    padding: 0.8rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.2rem;
+    color: var(--heighlight);
+    background-color: var(--success-light);
+    transition: ease-in-out 500ms;
+}
+.btnBlock:active, .btnBlock:focus, .btnBlock:hover {
+    color: var(--white);
+    background-color: var(--success);
+    border: 1px solid var(--heighlight);
+}
+@media screen and (max-width: 1200px) {
+    .cartSection {
+        max-width: 100%;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-gap: 1rem;
+        grid-template-areas: 
+        "cartItems cartItems"
+        "checkout checkout"; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        display: flex;
+        flex-wrap: wrap;
         flex-direction: column;
-        margin: 1rem auto 5rem;
     }
-    .cart {
-        max-width: 100%;
+    .product {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
     }
-    .checkout {
-        max-width: 100%;
-        margin-top: 1rem;
-        margin-left: 0;
+    .cardDetails {
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
     }
 }
