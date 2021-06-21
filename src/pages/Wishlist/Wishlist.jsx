@@ -10,7 +10,7 @@ export default function Wishlist() {
     return (
         <div className={`${styles.main}`}>
             {
-                !!!wishListItems.length && (
+                !wishListItems.length && (
                     <div className={`${styles.notify}`}>
                         <div className={`h3`}>Empty Wishlist!!</div>
                         <p>You have no item in wishlist.</p>
@@ -20,8 +20,7 @@ export default function Wishlist() {
             }
             <div className={`${styles.productGrid} mt-4`}>
                 {
-                    wishListItems &&
-                    wishListItems.map((item) => (
+                    wishListItems?.map((item) => (
                         <ProductCard key={item._id} product={item}/>
                     ))
                 }

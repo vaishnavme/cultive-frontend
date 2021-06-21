@@ -1,6 +1,7 @@
 .main {
     max-width: 1200px;
-    margin: auto;
+    margin: 5rem auto;
+    height: 40vh;
     padding: 1rem;
 }
 .notify {
@@ -17,7 +18,7 @@
 
 @media screen and (max-width: 768px) {
     .main {
-        margin: auto auto 2.5rem;
+        margin: 2.5rem auto 2.5rem;
     }
     .productGrid {
         display: grid;
@@ -28,7 +29,7 @@
 }
 @media screen and (max-width: 432px) {
     .main {
-        margin: auto;
+        margin: 5rem auto;
     }
     .productGrid {
         display: grid;
