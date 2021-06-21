@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account } from "./pages";
 import { useAuth ,useToast } from "./context";
-import { Navbar, Toast } from "./components";
+import { Navbar, Footer, Toast } from "./components";
 import { PrivateRoute } from "./api";
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
           <PrivateRoute path="/account" login={user} element={<Account />}/>
       </Routes>
       {toastBox["isVisible"] === true && <Toast/>}
+      <Footer/>
     </div>
   );
 }
