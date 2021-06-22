@@ -95,6 +95,7 @@ export const FilterBox = (
             borderRadius: "0.2rem",
             backgroundColor: "#f5f5ff",
             height: isVisible ? "auto" : 0,
+            overflow: "hidden",
             opacity: isVisible ? 1 : 0,
             transition: "all 800ms ease-in"
         }
