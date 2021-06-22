@@ -68,6 +68,7 @@
         flex-direction: column;
     }
     .action {
+        margin: auto;
         flex-wrap: wrap;
     }
     .actionSelect {
