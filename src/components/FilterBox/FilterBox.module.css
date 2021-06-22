@@ -1,21 +1,76 @@
-.sidebar {
-    position: fixed;
-    width: 16rem;
-    height: 100%;
+.wrapper {
+    max-width: 82%;
+    margin: auto;
+}
+.btnIcon {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.5rem;
+    border: none !important;
+    background: none;
+    display: flex;
+    align-items: center;
+    border-radius: 0.2rem;
+    width: max-content;
+}
+.btnIcon:hover, .btn:focus, .btn:active {
+    background-color: var(--success-light);
+    border: 1px solid var(--success);
+} 
+.action {
+    display: flex;
+    margin: 1.5rem 1.5rem 1.5rem 0;
+    padding: 1rem 1rem 1rem 0;
+}
+.actionSelect {
+    margin-left: 5rem;
+}
+.selectOption {
+    padding: 0.5rem;
+    width: 12rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.collapse {
+    border-radius: 0.2rem;
+    background-color: #f5f5ff;
+    height: 15rem;
+}
+.filterBox {
+    display: flex;
     padding: 1rem;
-    border-right: 3px solid var(--border);
 }
-.card {
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+.box {
+    flex: 0 0 40%;
+    max-width: 33%;
+    padding: 1rem;
 }
-.cardSection {
-    border-bottom: 1px solid var(--border);
+.filterName {
+    font-size: 1rem;
+    letter-spacing: 0.9px;
+    font-weight: 600;
 }
-
-
+.labelName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.25rem auto 0.25rem 1rem;
+}
 @media screen and (max-width: 768px) {
-    .sidebar {
-        all: unset;
+    .wrapper {
+        max-width: 100%;
+        padding: 1rem;
+    }
+    .filterBox {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .action {
+        flex-wrap: wrap;
+    }
+    .actionSelect {
+        margin: 1rem;
     }
 }
