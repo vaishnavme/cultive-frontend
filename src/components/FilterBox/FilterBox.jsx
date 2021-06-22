@@ -101,7 +101,7 @@ const CheckboxInput = ({checked, onChange, name}) => {
                 onChange={onChange}
                 value={name}
             />
-            {name}
+            <p className={`ml-2`}>{name}</p>
         </label> 
     )
 }
@@ -114,7 +114,7 @@ const RadioInput = ({onChange, name, checked}) => {
                 onChange={onChange}
                 checked={checked}
             />
-            {name} <i className='bx bx-star'></i>
+            <p className={`ml-2`}>{name} <i className='bx bx-star'></i></p>
         </label>
     )
 }
