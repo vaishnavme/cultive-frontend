@@ -11,6 +11,7 @@ const initialState = {
     wishListItems: [],
     showInventoryAll: [],
     categories: [],
+    rating: null,
     sortBy: null
 }
 
@@ -27,6 +28,7 @@ export const DataProvider = ({children}) => {
         showInventoryAll,
         categories,
         sortBy,
+        rating
     }, dispatch] = useReducer(dataReducer, initialState)
     
     // cart server operations
@@ -155,6 +157,7 @@ export const DataProvider = ({children}) => {
             showInventoryAll,
             categories,
             sortBy,
+            rating,
             dispatch,
             addToCartHandler,
             removeFromCart,

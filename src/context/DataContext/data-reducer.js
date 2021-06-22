@@ -1,4 +1,7 @@
 export const dataReducer = (state, {type, payload}) => {
+    console.log("state: ", state);
+    console.log("type: ", type);
+    console.log("payload: ", payload);
     switch(type) {
         case "SET_DATA":
             return {...state, productData: payload}
@@ -53,10 +56,10 @@ export const dataReducer = (state, {type, payload}) => {
             }
             
         case "SORT":
-            return {
-                ...state,
-                sortBy: payload
-            }
+            return {...state, sortBy: payload }
+
+        case "FILTER_BY_RATING": 
+            return {...state, rating: payload }
 
         case "TOGGLE_INVENTORY":
             return {
