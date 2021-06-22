@@ -4,7 +4,6 @@ import { ProductCard, FilterBox, onlyUnique, Loader } from "../../components";
 import styles from "./Products.module.css";
 
 export default function Products() {
-    const [isVisible, setVisible] = useState(false);
     const { productData, showInventoryAll, sortBy, categories, dispatch, isLoading } = useData();
     
     const categoryList = productData.map((property) => property.category).filter(onlyUnique);
@@ -29,16 +28,6 @@ export default function Products() {
 
     const sortedData = getSortedData(productData, sortBy);
     const filteredData = getFilteredData(sortedData, {showInventoryAll, categories});
-    
-    const setFilterBoxVisible = () => setVisible((prevState) => !prevState)
-    
-    const filterBoxStyle = {
-        borderRadius: "0.2rem",
-        backgroundColor: "#f5f5ff",
-        height: isVisible ? "auto" : 0,
-        opacity: isVisible ? 1 : 0,
-        transition: "all 800ms ease-in"
-    }
     
     return (
         <section>
