@@ -103,9 +103,15 @@ export const FilterBox = (
     return (
         <div className={`${styles.wrapper}`}>
                 <div className={`${styles.action}`}>
-                    <button onClick={setFilterBoxVisible} className={`${styles.btnIcon}`}><i class='bx bx-filter-alt mr-1 h4'></i> FILTER</button>
+                    <button 
+                        onClick={setFilterBoxVisible} 
+                        className={`${styles.btnIcon}`}><i class='bx bx-filter-alt mr-1 h4'></i> FILTER
+                    </button>
 
-                    <button className={`${styles.btnIcon} ml-4`}>CLEAR</button>
+                    <button 
+                        onClick={() => dispatch({type: "CLEAR_ALL_FILTERS"})} 
+                        className={`${styles.btnIcon} ml-4`}>CLEAR
+                    </button>
                     
                     <div className={`${styles.actionSelect}`}>
                         <select className={`${styles.selectOption}`}>
