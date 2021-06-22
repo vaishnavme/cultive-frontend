@@ -38,6 +38,9 @@ button:hover {
 button:focus {
   border: 1px solid var(--light-yellow);
 }
+.App {
+  position: relative;
+}
 .f-light {
   color: var(--light-gray);
 }
