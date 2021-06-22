@@ -114,11 +114,11 @@ export const FilterBox = (
                     </button>
                     
                     <div className={`${styles.actionSelect}`}>
-                        <select className={`${styles.selectOption}`}>
-                            <option value="volvo">Best Seller</option>
-                            <option value="audi">Featured</option>
-                            <option value="saab">Price, Low to High</option>
-                            <option value="vw">Price, High to Low</option>
+                        <select onChange={(e) => dispatch({type: "SORT", payload:e.target.value})} className={`${styles.selectOption}`}>
+                            <option value="BEST_SELLER">Best Seller</option>
+                            <option value="FEATURED">Featured</option>
+                            <option value="PRICE_LOW_TO_HIGH">Price, Low to High</option>
+                            <option value="PRICE_HIGH_TO_LOW">Price, High to Low</option>
                         </select>
                     </div>
 
