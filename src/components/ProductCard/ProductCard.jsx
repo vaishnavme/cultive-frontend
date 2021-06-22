@@ -38,7 +38,7 @@ export const ProductCard = ({product}) => {
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
                     onClick={() => wishBtnHandler(product._id)}>
-                    {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i class='bx bx-heart' ></i>}                
+                    {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}                
                 </button>
             </div>
         </div>
