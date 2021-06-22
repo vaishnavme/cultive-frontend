@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import styles from "./Toast.module.css";
 import { useToast } from "../../context";
-import successIcon from "../../assets/images/alert-check.svg"
-import errorIcon from "../../assets/images/alert-danger.svg"
+
 
 export const Toast = () => {
     const { toastBox, toastDispatch } = useToast();
@@ -21,13 +20,13 @@ export const Toast = () => {
     const checkToastType = (type) => {
         switch(type) {
             case "SUCCESS":
-                return { toastStyle: "alert-success", icon: successIcon}
+                return { toastStyle: "alert-success", icon: "bx-check"}
             
             case "ERROR":
-                return { toastStyle: "alert-danger", icon: errorIcon}
+                return { toastStyle: "alert-danger", icon: "bx-error"}
 
             default:
-                return { toastStyle: "alert-primary", icon: successIcon}
+                return { toastStyle: "alert-primary", icon: "bx-check"}
         }
     }
 
@@ -35,7 +34,7 @@ export const Toast = () => {
     
     return (
         <div className={`alert ${toastType.toastStyle} ${styles.toastBox}`}>
-            <img className={`alert-icon`} src={toastType.icon} alt={toastType.toastStyle}/>
+            <i className={`bx ${toastType.icon}`}></i>
                 {toastBox["message"]}
         </div>
     )
