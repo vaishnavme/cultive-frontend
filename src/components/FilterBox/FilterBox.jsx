@@ -1,13 +1,7 @@
 import { Fragment, useState } from "react";
 import styles from "./FilterBox.module.css";
 
-export const FilterBox = (
-    {dispatch, 
-    showInventoryAll, 
-    sortBy, 
-    categoryList, 
-    categories
-    }) => {
+export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
         const [isVisible, setVisible] = useState(false);
 
         const setFilterBoxVisible = () => setVisible((prevState) => !prevState)
@@ -54,7 +48,7 @@ export const FilterBox = (
                                 <li 
                                     key={category}
                                     className={`d-flex flex-align-center`}>
-                                <Checkbox 
+                                <CheckboxInput 
                                     checked={categories.some(value => value === category)}
                                     onChange={() => dispatch({type: "TOGGLE_CATEGORY", payload: category})}
                                     name={category}
@@ -66,7 +60,28 @@ export const FilterBox = (
                     </div>
                     <div className={`${styles.box}`}>
                         <div className={`${styles.filterName}`}>RATING</div>
-                        
+                        <ul className={`mt-2 mb-2`}>
+                            <li className={`d-flex flex-align-center`}>
+                                <RadioInput 
+                                    name={4} checked={rating === 4}
+                                    onChange={(e) => dispatch({type: "FILTER_BY_RATING", payload: 4})}/>
+                            </li>
+                            <li className={`d-flex flex-align-center`}>
+                                <RadioInput 
+                                    name={3} checked={rating === 3}
+                                    onChange={(e) => dispatch({type: "FILTER_BY_RATING", payload: 3})}/>
+                            </li>
+                            <li className={`d-flex flex-align-center`}>
+                                <RadioInput 
+                                    name={2} checked={rating === 2}
+                                    onChange={(e) => dispatch({type: "FILTER_BY_RATING", payload: 2})}/>
+                            </li>
+                            <li className={`d-flex flex-align-center`}>
+                                <RadioInput 
+                                    name={1} checked={rating === 1}
+                                    onChange={(e) => dispatch({type: "FILTER_BY_RATING", payload: 1})}/>
+                            </li>
+                        </ul>
                     </div>
                     <div className={`${styles.box}`}>
                         <div className={`${styles.filterName}`}>PRICE</div>
@@ -77,15 +92,29 @@ export const FilterBox = (
     )
 }
 
-const Checkbox = ({checked, onChange, name}) => {
+const CheckboxInput = ({checked, onChange, name}) => {
     return (
-        <Fragment>
-                <input 
+        <label className={`${styles.labelName}`}>
+            <input 
                 type="checkbox"
                 checked={checked} 
                 onChange={onChange}
-                value={name}/>
-            <label className={`${styles.labelName}`}>{name}</label>
-        </Fragment>
+                value={name}
+            />
+            {name}
+        </label> 
+    )
+}
+
+const RadioInput = ({onChange, name, checked}) => {
+    return (
+        <label className={`${styles.labelName}`}>
+            <input 
+                type="radio"
+                onChange={onChange}
+                checked={checked}
+            />
+            {name} <i className='bx bx-star'></i>
+        </label>
     )
 }

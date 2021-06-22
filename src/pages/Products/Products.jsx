@@ -3,7 +3,7 @@ import { ProductCard, FilterBox, onlyUnique, Loader } from "../../components";
 import styles from "./Products.module.css";
 
 export default function Products() {
-    const { productData, showInventoryAll, sortBy, categories, dispatch, isLoading } = useData();
+    const { productData, showInventoryAll, sortBy, rating, categories, dispatch, isLoading } = useData();
     
     const categoryList = productData.map((property) => property.category).filter(onlyUnique);
 
@@ -17,6 +17,15 @@ export default function Products() {
         }
         return productList;
     }
+
+    const getProductByRatings = (productList, rating) => {
+        console.log("sort-rating: ", rating)
+        if(rating !== null) {
+            return productList.filter((product) => product.rating >= rating)
+        } else {
+            return productList
+        }
+    }
     
     const getFilteredData = (
         productList,{ showInventoryAll, categories })  => {
@@ -24,8 +33,8 @@ export default function Products() {
             .filter(product => categories.length > 0 ? categories.includes(product.category) : product)
             .filter(({ inStock }) => (showInventoryAll ? true : inStock))
       }
-
-    const sortedData = getSortedData(productData, sortBy);
+    const filterByRating = getProductByRatings(productData, rating)
+    const sortedData = getSortedData(filterByRating, sortBy);
     const filteredData = getFilteredData(sortedData, {showInventoryAll, categories});
     
     return (
@@ -38,6 +47,7 @@ export default function Products() {
                 categoryList={categoryList}
                 categories={categories}
                 sortBy={sortBy}
+                rating={rating}
                 dispatch={dispatch}
             />
             <div className={`${styles.container}`}>
