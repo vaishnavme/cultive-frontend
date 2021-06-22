@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useData, useAuth } from "../../context";
 import axios from "axios";
-import { checkIn, Loader, Modal } from "../../components";
+import { alreadyExist, Loader, Modal } from "../../components";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
@@ -10,14 +10,14 @@ export default function ProductDetails() {
     const [product, setProduct] = useState();
     const { cartItems, wishListItems, addToCartHandler, addToWishlist, removeFromWishlist, isLoading, setLoading } = useData();
     const  { user } = useAuth();
-    const { id } = useParams();
+    const { productID } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
             try {
                 setLoading(true)
-                const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${id}`)
+                const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${productID}`)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
@@ -27,11 +27,11 @@ export default function ProductDetails() {
             }
         })();
         // eslint-disable-next-line 
-    },[id]);
+    },[productID]);
 
     const wishBtnHandler = (productID) => {
         user ? (
-            checkIn(wishListItems, productID) ?
+            alreadyExist(wishListItems, productID) ?
             removeFromWishlist({product: productID})
             : addToWishlist({product: productID})
         ) : setShowModal(true)
@@ -39,19 +39,19 @@ export default function ProductDetails() {
 
     const cartBtnHandler = (productID) => {
         user ? (
-            checkIn(cartItems, productID) ? navigate("/cart")
+            alreadyExist(cartItems, productID) ? navigate("/cart")
             : addToCartHandler({product: productID})
         ) : setShowModal(true)
     }
 
-    const modalCloseBtn = () => {
+    const setModelVisibility = () => {
         setShowModal(() => !showModal);
     }
 
     return (
         <div className={`${styles.container}`}>
             {isLoading && <Loader/>}
-            {showModal && <Modal modalCloseBtn={modalCloseBtn}/>}
+            {showModal && <Modal setModelVisibility={setModelVisibility}/>}
             {
                 product && 
                 <div className={`${styles.productSummary}`}>
@@ -90,14 +90,14 @@ export default function ProductDetails() {
                         <div className={`d-flex`}>
                             <button className={`btn ${styles.btnSecondary}`}
                                 onClick={() => wishBtnHandler(product._id)}>
-                                {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}
+                                {alreadyExist(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}
                             </button>
                             <button 
                                 disabled={product.inStock ? false : true}
                                 className={`btn ${styles.btnPrimary}`}
                                 onClick={() => cartBtnHandler(product._id)}>
                                 {product.inStock ? 
-                                    (checkIn(cartItems, product._id) ? "Go to Cart" : "Buy")
+                                    (alreadyExist(cartItems, product._id) ? "Go to Cart" : "Buy")
                                 : "Not Avaliable"
                             }
                                       

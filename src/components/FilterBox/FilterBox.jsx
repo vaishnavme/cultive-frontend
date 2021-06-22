@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import styles from "./FilterBox.module.css";
 
 export const FilterBox = ({dispatch, categoryList, categories, rating}) => {

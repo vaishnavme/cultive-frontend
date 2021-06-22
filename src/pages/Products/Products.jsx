@@ -1,11 +1,11 @@
 import { useData } from "../../context";
-import { ProductCard, FilterBox, onlyUnique, Loader } from "../../components";
+import { ProductCard, FilterBox, onlyUniqueValues, Loader } from "../../components";
 import styles from "./Products.module.css";
 
 export default function Products() {
     const { productData, showInventoryAll, sortBy, rating, categories, dispatch, isLoading } = useData();
     
-    const categoryList = productData.map((property) => property.category).filter(onlyUnique);
+    const categoryList = productData.map((property) => property.category).filter(onlyUniqueValues);
 
     const getSortedData = (productList, sortBy) => {
         if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {

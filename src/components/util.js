@@ -1,7 +1,7 @@
-export const checkIn = (collection, itemID) => {
+export const alreadyExist = (collection, itemID) => {
     return !!collection.find((item) => item._id === itemID);
 }
 
-export const onlyUnique = (value, index, self) => {
+export const onlyUniqueValues = (value, index, self) => {
     return self.indexOf(value) === index;
   }

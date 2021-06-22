@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useData, useAuth } from "../../context";
-import { checkIn, Modal } from "../index";
+import { alreadyExist, Modal } from "../index";
 import styles from "./ProductCard.module.css";
 
 export const ProductCard = ({product}) => {
@@ -11,7 +11,7 @@ export const ProductCard = ({product}) => {
 
     const wishBtnHandler = (productID) => {
         user ? (
-            checkIn(wishListItems, productID) ?
+            alreadyExist(wishListItems, productID) ?
             removeFromWishlist({product: productID})
             : addToWishlist({product: productID})
         ) : setShowModal(true)
@@ -38,7 +38,7 @@ export const ProductCard = ({product}) => {
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
                     onClick={() => wishBtnHandler(product._id)}>
-                    {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}                
+                    {alreadyExist(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}                
                 </button>
             </div>
         </div>

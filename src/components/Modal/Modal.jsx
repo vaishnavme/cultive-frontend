@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Modal.module.css";
 
-export const Modal = ({modalCloseBtn}) => {
+export const Modal = ({setModelVisibility}) => {
     return (
         <div className={`${styles.modalBox}`}>
             <div className={`${styles.loginModal}`}>
@@ -10,7 +10,7 @@ export const Modal = ({modalCloseBtn}) => {
                 <div className={`${styles.menuFooter}`}>
                     <button 
                         className={`btn btn-secondary w40`}
-                        onClick={() => modalCloseBtn(false)}>CLOSE
+                        onClick={() => setModelVisibility(false)}>CLOSE
                     </button>
                     <button className={`btn btn-secondary w40`}>
                         <Link to="/login">Log In</Link>
