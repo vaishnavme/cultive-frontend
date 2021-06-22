@@ -90,7 +90,7 @@ export default function ProductDetails() {
                         <div className={`d-flex`}>
                             <button className={`btn ${styles.btnSecondary}`}
                                 onClick={() => wishBtnHandler(product._id)}>
-                                {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i class='bx bx-heart' ></i>}
+                                {checkIn(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}
                             </button>
                             <button 
                                 disabled={product.inStock ? false : true}
