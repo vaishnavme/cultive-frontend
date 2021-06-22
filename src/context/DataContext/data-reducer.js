@@ -81,6 +81,7 @@ export const dataReducer = (state, {type, payload}) => {
                 inStock: false,
                 showInventoryAll: true,
                 categories: [],
+                rating: null,
                 sortBy: null
             };
 
