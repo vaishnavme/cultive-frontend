@@ -105,7 +105,7 @@ export const FilterBox = (
                 <div className={`${styles.action}`}>
                     <button 
                         onClick={setFilterBoxVisible} 
-                        className={`${styles.btnIcon}`}><i class='bx bx-filter-alt mr-1 h4'></i> FILTER
+                        className={`${styles.btnIcon}`}><i className='bx bx-filter-alt mr-1 h4'></i> FILTER
                     </button>
 
                     <button 
