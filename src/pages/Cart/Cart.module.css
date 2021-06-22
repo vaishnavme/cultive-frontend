@@ -92,11 +92,16 @@
     border-radius: 0.2rem;
     border: 1px solid var(--border);
     cursor: pointer;
+    background-color: var(--white);
 }
-.btnSelect:active, .btnSelect:focus, 
+.btnSelect:focus {
+    background-color: var(--success-light);
+}
+.btnSelect:active, .btnSelect:focus,
 .inputField:active, .inputField:focus {
     border: 1px solid var(--heighlight);
 }
+
 .formGroup {
     border-bottom: 1px solid var(--border);
 }

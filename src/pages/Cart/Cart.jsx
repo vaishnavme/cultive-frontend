@@ -66,8 +66,8 @@ export default function Cart() {
                                 <div className={`${styles.cardCheck}`}>
                                     <label className={`${styles.lableName}`}>Payment Type</label>
                                     <div className={`${styles.select}`}>
-                                        <div className={`${styles.btnSelect}`} role="button"><i className='bx bxl-visa' ></i></div>
-                                        <div className={`${styles.btnSelect}`}><i className='bx bxl-paypal' ></i></div>
+                                        <button className={`${styles.btnSelect}`}><i className='bx bxl-visa' ></i></button>
+                                        <button className={`${styles.btnSelect}`}><i className='bx bxl-paypal' ></i></button>
                                     </div>
 
                                     <div className={`${styles.formGroup} mt-2`}>
