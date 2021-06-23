@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useData, useAuth } from "../../context";
 import axios from "axios";
-import { alreadyExist, Loader, Modal } from "../../components";
+import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
-    const { cartItems, wishListItems, addToCartHandler, addToWishlist, removeFromWishlist, isLoading, setLoading } = useData();
+    const {productData, cartItems, wishListItems, updateCartProducts, addToWishlist, removeFromWishlist, isLoading, setLoading, } = useData();
     const  { user } = useAuth();
     const { productID } = useParams();
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ export default function ProductDetails() {
             try {
                 setLoading(true)
                 const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${productID}`)
+                console.log("product: ", product)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
@@ -37,16 +38,18 @@ export default function ProductDetails() {
         ) : setShowModal(true)
     }
 
-    const cartBtnHandler = (productID) => {
+    const addToCart = (product) => {
         user ? (
-            alreadyExist(cartItems, productID) ? navigate("/cart")
-            : addToCartHandler({product: productID})
+            alreadyExist(cartItems, product._id) ? navigate("/cart")
+            : updateCartProducts({product: product})
         ) : setShowModal(true)
     }
 
     const setModelVisibility = () => {
         setShowModal(() => !showModal);
     }
+    
+    const similarProducts = product && productData.filter((item) => item.category === product.category).slice(0,4)
 
     return (
         <div className={`${styles.container}`}>
@@ -95,7 +98,7 @@ export default function ProductDetails() {
                             <button 
                                 disabled={product.inStock ? false : true}
                                 className={`btn ${styles.btnPrimary}`}
-                                onClick={() => cartBtnHandler(product._id)}>
+                                onClick={() => addToCart(product)}>
                                 {product.inStock ? 
                                     (alreadyExist(cartItems, product._id) ? "Go to Cart" : "Buy")
                                 : "Not Avaliable"
@@ -106,6 +109,16 @@ export default function ProductDetails() {
                     </div>
                 </div>
             }
+            <div className={`${styles.container}`}>
+            <div className={`h3`}>Similar Products</div>
+                <div className={`${styles.productGrid} mt-4`}>
+                    {
+                        similarProducts?.map((product) => (
+                            <ProductCard key={product._id} product={product}/>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     )
 }
