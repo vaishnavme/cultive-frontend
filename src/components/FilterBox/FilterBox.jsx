@@ -38,9 +38,9 @@ export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
                     </div>
 
                 </div>
-                <div style={filterBoxStyle}>
+                <div className={`${styles.filterContainer} ${isVisible || styles.hideFilterCont}` }>
                     <div className={`${styles.filterBox}`}>
-                        <div className={`${styles.box}`}>
+                        <div className={`${styles.box1}`}>
                             <div className={`${styles.filterName}`}>CATEGORIES</div>
                             <ul className={`mt-2 mb-2`}>
                             {
@@ -58,7 +58,7 @@ export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
                         }
                         </ul>
                     </div>
-                    <div className={`${styles.box}`}>
+                    <div className={`${styles.box2}`}>
                         <div className={`${styles.filterName}`}>RATING</div>
                         <ul className={`mt-2 mb-2`}>
                             <li className={`d-flex flex-align-center`}>
@@ -83,7 +83,7 @@ export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
                             </li>
                         </ul>
                     </div>
-                    <div className={`${styles.box}`}>
+                    <div className={`${styles.box3}`}>
                         <div className={`${styles.filterName}`}>PRICE</div>
                     </div>
                 </div>
