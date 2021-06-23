@@ -30,18 +30,55 @@ export const DataProvider = ({children}) => {
         sortBy,
         rating
     }, dispatch] = useReducer(dataReducer, initialState)
+
+    // data fetching operations
+    const getProductData = async() => {
+        try {
+            setLoading(true);
+            const {data: {product}} = await axios.get(`/products`);
+            dispatch({type: "SET_DATA", payload: product});
+            setLoading(false);
+        } catch(err) {
+            console.log(err);
+        } finally {
+            setLoading(false);
+        }
+    }
+
+    const getUserData = async () => {
+        try {
+            //get user cart items
+            const  { data:{cart} } = await axios.get(`/cart/${user._id}`);
+            const userCart = cart.cartItems;
+            const userCartItems = userCart.map((item) => {
+                return { ...item.product, quantity: item.quantity };
+            });
+            dispatch({type: "SET_CART", payload: userCartItems})
+
+            //get user wishlist
+            const  { data:{wishlist} } = await axios.get(`/wishlist/${user._id}`); 
+            const userWishlist = wishlist.wishlistItems;
+            const userWishlistItems = userWishlist.map((item) => item.product)         
+            dispatch({type: "SET_WISHLIST", payload: userWishlistItems})
+
+        } catch(err) {
+            console.log()
+        }
+    }
     
     // cart server operations
-    const addToCartHandler = async ({product}) => {
-        const {data: {success}} = await axios.post(`/cart/${user._id}`, {
-            cartItems: {
-                product: product
+    const updateCartProducts = async ({product}) => {
+        try {
+            const {data: {success}} = await axios.post(`/cart/${user._id}`, {
+                cartItems: {
+                    product: product._id
+                }
+            }) 
+            if(success) {
+                toastDispatch({type:"SUCCESS", payload: "Added to Cart!"});
+                dispatch({type:"ADD_TO_CART", payload: product})
             }
-        }) 
-        if(success) {
-            toastDispatch({type:"SUCCESS", payload: "Added to Cart!"});
-            getCartItems();
-        } else {
+        } catch(err) {
             toastDispatch({type: "ERROR", payload: "ERROR Occured"})
         }
     }
@@ -76,7 +113,6 @@ export const DataProvider = ({children}) => {
         })
         if(success) {
             toastDispatch({type:"SUCCESS", payload: "Added to Wishlist!"});
-            getWishlistItems();
         } else {
             toastDispatch({type: "DANGER", payload: "Error Occured!"})
         }
@@ -86,66 +122,14 @@ export const DataProvider = ({children}) => {
         const {data: {success}} = await axios.delete(`/wishlist/${user._id}/${product}`);
         if(success) {
             toastDispatch({type:"SUCCESS", payload: "Removed to Wishlist!"});
-            getWishlistItems();
         } else {
             toastDispatch({type:"SUCCESS", payload: "Error Occured!"});
         }
     }
 
-    // data fetching operations
-    const getProductData = async() => {
-        try {
-            setLoading(true);
-            const {data: {product}} = await axios.get(`/products`);
-            dispatch({type: "SET_DATA", payload: product});
-            setLoading(false);
-        } catch(err) {
-            console.log(err);
-        } finally {
-            setLoading(false);
-        }
-    }
-    
-    const getCartItems = async() => {
-        if(user) {
-            try {
-                setLoading(true);
-                const  { data:{cart} } = await axios.get(`/cart/${user._id}`);
-                const userCart = cart.cartItems;
-                const userCartItems = userCart.map((item) => {
-                    return { ...item.product, quantity: item.quantity };
-                });
-                dispatch({type: "SET_CART", payload: userCartItems})
-                setLoading(false);
-            } catch(err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        }
-    }
-
-    const getWishlistItems = async() => {
-        if(user) {
-            try {
-                setLoading(true);
-                const  { data:{wishlist} } = await axios.get(`/wishlist/${user._id}`); 
-                const userWishlist = wishlist.wishlistItems;
-                const userWishlistItems = userWishlist.map((item) => item.product)         
-                dispatch({type: "SET_WISHLIST", payload: userWishlistItems})
-                setLoading(false);
-            } catch(err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        }
-    }
-
     useEffect(() => {
         getProductData();
-        getCartItems();
-        getWishlistItems();
+        getUserData();
          // eslint-disable-next-line
     },[]);
 
@@ -159,7 +143,7 @@ export const DataProvider = ({children}) => {
             sortBy,
             rating,
             dispatch,
-            addToCartHandler,
+            updateCartProducts,
             removeFromCart,
             quantityHandler,
             addToWishlist,
