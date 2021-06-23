@@ -49,7 +49,7 @@ export default function ProductDetails() {
         setShowModal(() => !showModal);
     }
     
-    const similarProducts = product && productData.filter((item) => item.category === product.category).slice(0,4)
+    const similarProducts = product && productData.filter((item) => item.category === product.category).slice(1,5)
 
     return (
         <div className={`${styles.container}`}>
