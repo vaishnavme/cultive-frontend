@@ -52,9 +52,9 @@ export default function Products() {
             />
             <div className={`${styles.container}`}>
                 <div className={`${styles.productGrid} mt-4`}>
-                {
-                    filteredData?.map((product) => (
-                        <ProductCard key={product._id} product={product}/>
+                    {
+                        filteredData?.map((product) => (
+                            <ProductCard key={product._id} product={product}/>
                         ))
                     }
                 </div>
