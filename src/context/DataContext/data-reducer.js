@@ -14,7 +14,7 @@ export const dataReducer = (state, {type, payload}) => {
             return {...state, wishListItems: payload || []}
         }
         case "ADD_TO_CART":
-            return {...state, cartItems: state.cartItems.concat(payload)}
+            return {...state, cartItems: [...state.cartItems, {...payload, quantity: 1}]}
 
             
         case "REMOVE_FROM_CART":
