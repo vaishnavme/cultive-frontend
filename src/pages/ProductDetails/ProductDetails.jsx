@@ -4,6 +4,7 @@ import { useData, useAuth, useToast } from "../../context";
 import axios from "axios";
 import { toggleWishlistItems } from "../../services";
 import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
+import { addCartItems } from "../../services";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
@@ -56,7 +57,12 @@ export default function ProductDetails() {
     const addToCart = (product) => {
         user ? (
             alreadyExist(cartItems, product._id) ? navigate("/cart")
-            : updateCartProducts({product: product})
+            : addCartItems({
+                product: product, 
+                userID: user._id,
+                dispatch,
+                toastDispatch
+            })
         ) : setShowModal(true)
     }
 
