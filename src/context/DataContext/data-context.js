@@ -64,27 +64,6 @@ export const DataProvider = ({children}) => {
             console.log()
         }
     }
-    
-    const quantityHandler= async({type, product, quantity}) => {
-        const {data:{success}} = await axios.post(`/cart/${user._id}/${product}`, {
-            quantity: type === "INC_QNT" ? quantity + 1 : quantity - 1
-        })
-        if(success) {
-            dispatch({type: type, payload: product})
-        } else {
-            dispatch({type: type, payload: product})
-        }
-    }
-
-    const removeFromCart = async({product}) => {
-        const {data: {success}} = await axios.delete(`/cart/${user._id}/${product}`)
-        if(success) {
-            toastDispatch({type:"SUCCESS", payload: "Removed from Cart!"});
-            dispatch({type: "REMOVE_FROM_CART", payload: product})
-        } else {
-            toastDispatch({type:"SUCCESS", payload: "Error Occured!"});
-        }
-    }
 
     useEffect(() => {
         getProductData();
@@ -102,8 +81,6 @@ export const DataProvider = ({children}) => {
             sortBy,
             rating,
             dispatch,
-            removeFromCart,
-            quantityHandler,
             isLoading,
             setLoading
         }}>
