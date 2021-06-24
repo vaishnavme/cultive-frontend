@@ -9,11 +9,8 @@ export const Toast = () => {
     useEffect(() => {
        const toastTimeOut = setTimeout(() => {
            toastDispatch({type: "INITIAL"});
-       }, 1000);
+       }, 2000);
 
-       return () => {
-           clearTimeout(toastTimeOut);
-       }
        // eslint-disable-next-line
     }, [])
     
