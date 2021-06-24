@@ -8,8 +8,6 @@ export default function Cart() {
     const navigate = useNavigate();
     const { user } = useAuth();
     const  { cartItems, wishListItems, dispatch } = useData();
-    
-    console.log(cartItems);
 
     const totalPrice = (items) => {
         return items.reduce((total, { price, quantity }) => total + price * quantity, 0);
