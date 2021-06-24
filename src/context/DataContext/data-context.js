@@ -57,9 +57,8 @@ export const DataProvider = ({children}) => {
 
             //get user wishlist
             const  { data:{wishlist} } = await axios.get(`/wishlist/${user._id}`); 
-            const userWishlist = wishlist.wishlistItems;
-            const userWishlistItems = userWishlist.map((item) => item.product)         
-            dispatch({type: "SET_WISHLIST", payload: userWishlistItems})
+            const userWishlist = wishlist.wishlist;
+            dispatch({type: "SET_WISHLIST", payload: userWishlist})
 
         } catch(err) {
             console.log()
@@ -104,29 +103,6 @@ export const DataProvider = ({children}) => {
         }
     }
 
-    // wishlist operations
-    const addToWishlist = async({product}) => {
-        const {data: {success}} = await axios.post(`/wishlist/${user._id}`, {
-            wishlistItems: {
-                product: product
-            }
-        })
-        if(success) {
-            toastDispatch({type:"SUCCESS", payload: "Added to Wishlist!"});
-        } else {
-            toastDispatch({type: "DANGER", payload: "Error Occured!"})
-        }
-    }
-
-    const removeFromWishlist = async({product}) => {
-        const {data: {success}} = await axios.delete(`/wishlist/${user._id}/${product}`);
-        if(success) {
-            toastDispatch({type:"SUCCESS", payload: "Removed to Wishlist!"});
-        } else {
-            toastDispatch({type:"SUCCESS", payload: "Error Occured!"});
-        }
-    }
-
     useEffect(() => {
         getProductData();
         getUserData();
@@ -146,8 +122,6 @@ export const DataProvider = ({children}) => {
             updateCartProducts,
             removeFromCart,
             quantityHandler,
-            addToWishlist,
-            removeFromWishlist,
             isLoading,
             setLoading
         }}>
