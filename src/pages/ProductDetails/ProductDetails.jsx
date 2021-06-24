@@ -78,6 +78,7 @@ export default function ProductDetails() {
             {showModal && <Modal setModelVisibility={setModelVisibility}/>}
             {
                 product && 
+                <>
                 <div className={`${styles.productSummary}`}>
                     <div className={`${styles.productImage}`}>
                         <img 
@@ -129,9 +130,8 @@ export default function ProductDetails() {
                         </div>
                     </div>
                 </div>
-            }
-            <div className={`${styles.container}`}>
-            <div className={`h3`}>Similar Products</div>
+                <div className={`${styles.containerNext}`}>
+                <div className={`h3`}>Similar Products</div>
                 <div className={`${styles.productGrid} mt-4`}>
                     {
                         similarProducts?.map((product) => (
@@ -140,6 +140,8 @@ export default function ProductDetails() {
                     }
                 </div>
             </div>
+            </>
+            }
         </div>
     )
 }
