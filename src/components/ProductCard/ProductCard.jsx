@@ -42,7 +42,7 @@ export const ProductCard = ({product}) => {
         <div className={`${styles.productContainer}`}>
             <Link to={`/products/${product._id}`}>
                 <div className={`${styles.productCard}`}>
-                    <img className={`${styles.productImg}`} src={product.image} alt={product.name}/>
+                    <img className={`${styles.productImg} ${product.inStock || styles.outOffStock}`} src={product.image} alt={product.name}/>
                     <div className={`${styles.productInfo}`}>
                         <div className={`h6`}>{product.name}</div>
                         <div className={`h6 f-light`}>₹ {product.price}</div>

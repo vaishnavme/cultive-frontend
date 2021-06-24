@@ -21,6 +21,9 @@
     height: auto;
     object-fit: contain;
 }
+.outOffStock {
+    filter: grayscale(1);
+}
 .productInfo {
     grid-gap: 0 4px;
     gap: 0 4px;

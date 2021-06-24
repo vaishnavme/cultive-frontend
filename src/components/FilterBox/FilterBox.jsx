@@ -20,7 +20,6 @@ export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
                     
                     <div className={`${styles.actionSelect}`}>
                         <select onChange={(e) => dispatch({type: "SORT", payload:e.target.value})} className={`${styles.selectOption}`}>
-                            <option value="BEST_SELLER">Best Seller</option>
                             <option value="FEATURED">Featured</option>
                             <option value="PRICE_LOW_TO_HIGH">Price, Low to High</option>
                             <option value="PRICE_HIGH_TO_LOW">Price, High to Low</option>

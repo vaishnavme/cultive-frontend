@@ -139,8 +139,8 @@ export default function Cart() {
                                         </div>
                                         <div className={`${styles.billingTotal}`}>
                                             <ul>
-                                                <li>Subtotal</li>
-                                                <li>Shipping</li>
+                                                <li>{cartTotal}</li>
+                                                <li>Free</li>
                                                 <li>{cartTotal}</li>
                                             </ul>
                                         </div>

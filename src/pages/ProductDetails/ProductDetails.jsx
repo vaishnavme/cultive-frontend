@@ -82,7 +82,7 @@ export default function ProductDetails() {
                 <div className={`${styles.productSummary}`}>
                     <div className={`${styles.productImage}`}>
                         <img 
-                            className={`${styles.image}`}
+                            className={`${styles.image} ${product.inStock || styles.outOffStock}`}
                             src={product.image} 
                             alt={product.name}/>
                     </div>

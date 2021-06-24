@@ -13,6 +13,9 @@
     flex: 1;
     padding: 0.5rem;
 }
+.outOffStock {
+    filter: grayscale(1);
+}
 .productInfo {
     flex: 1;
     padding: 0.5rem;
