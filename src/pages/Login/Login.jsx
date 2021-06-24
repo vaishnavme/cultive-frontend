@@ -16,7 +16,6 @@ export default function Login() {
             userEmail,
             userPassword
         )
-        console.log(success)
         if(success) {
             navigate(state?.from ? state.from : "/");
         } else {
