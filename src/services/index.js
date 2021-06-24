@@ -1,0 +1,1 @@
+export { toggleWishlistItems } from "./wishlist.service";
