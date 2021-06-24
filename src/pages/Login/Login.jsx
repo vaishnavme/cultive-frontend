@@ -57,7 +57,7 @@ export default function Login() {
                                 Log in
                         </button>
                     </form>
-                    <p>Don't have account? <Link className={`f-primary`} to="/signup">Sign Up</Link> here</p>
+                    <p>Don't have account? <Link className="f-primary" to="/signup">Sign Up</Link> here</p>
                 </div>
             </div>
         </div>
