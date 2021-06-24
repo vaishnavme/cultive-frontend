@@ -5,5 +5,5 @@ export { FilterBox } from "./FilterBox/FilterBox";
 export { Footer } from "./Footer/Footer";
 export { Loader } from "./Loader/Loader";
 export { Modal } from "./Modal/Modal";
-export { Toast } from "./Toast/Toast";
 export { alreadyExist, onlyUniqueValues } from "./util";
+export { successNotification, successRemoveNotification } from "./toast";

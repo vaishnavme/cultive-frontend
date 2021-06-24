@@ -4,4 +4,4 @@ export const alreadyExist = (collection, itemID) => {
 
 export const onlyUniqueValues = (value, index, self) => {
     return self.indexOf(value) === index;
-  }
+}

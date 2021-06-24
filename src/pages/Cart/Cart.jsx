@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useData, useAuth, useToast } from "../../context";
+import { useData, useAuth } from "../../context";
 import { alreadyExist } from "../../components";
 import { updateProductQuantity, removeFromCart, toggleWishlistItems } from "../../services";
 import styles from "./Cart.module.css";
@@ -7,7 +7,6 @@ import styles from "./Cart.module.css";
 export default function Cart() {
     const navigate = useNavigate();
     const { user } = useAuth();
-    const { toastDispatch } = useToast();
     const  { cartItems, wishListItems, dispatch } = useData();
     
     console.log(cartItems);
@@ -24,14 +23,12 @@ export default function Cart() {
             userID: user._id,
             action: "REMOVE",
             dispatch,
-            toastDispatch
         })
         : toggleWishlistItems({
             product: product, 
             userID: user._id,
             action: "ADD",
             dispatch,
-            toastDispatch
         })
     }
 
@@ -40,7 +37,6 @@ export default function Cart() {
             productID: product,
             userID: user._id,
             dispatch,
-            toastDispatch
         })
     }
 

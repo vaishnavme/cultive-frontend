@@ -1,4 +1,5 @@
 import axios from "axios";
+import { successNotification } from "../components";
 
 export const addCartItems = async({
     product, userID, dispatch, toastDispatch
@@ -8,7 +9,7 @@ export const addCartItems = async({
             productId: product._id
         }) 
         if(success) {
-            toastDispatch({type:"SUCCESS", payload: "Added to Cart!"});
+            successNotification("Added to cart!");
             dispatch({type:"ADD_TO_CART", payload: product})
         }
     } catch(err) {

@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account } from "./pages";
-import { useAuth ,useToast } from "./context";
-import { Navbar, Footer, Toast } from "./components";
+import { useAuth } from "./context";
+import { Navbar, Footer } from "./components";
+import { ToastContainer, Slide } from "react-toastify";
 import { PrivateRoute } from "./api";
 
 function App() {
   const { user } = useAuth();
-  const { toastBox } = useToast();
   return (
     <div className="App">
       <Navbar/>
@@ -20,7 +20,17 @@ function App() {
           <PrivateRoute path="/wishlist" login={user} element={<Wishlist />}/>
           <PrivateRoute path="/account" login={user} element={<Account />}/>
       </Routes>
-      {toastBox["isVisible"] === true && <Toast/>}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        transition={Slide}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+      />
       <Footer/>
     </div>
   );

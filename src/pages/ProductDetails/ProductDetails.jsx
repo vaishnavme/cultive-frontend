@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useData, useAuth, useToast, useLoader } from "../../context";
+import { useData, useAuth, useLoader } from "../../context";
 import axios from "axios";
 import { toggleWishlistItems } from "../../services";
 import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
@@ -14,7 +14,7 @@ export default function ProductDetails() {
     const { isLoading, setLoading } = useLoader();
     const { user } = useAuth();
     const { dispatch } = useData();
-    const { toastDispatch } = useToast();
+
     const { productID } = useParams();
     const navigate = useNavigate();
 
@@ -42,14 +42,12 @@ export default function ProductDetails() {
                 userID: user._id,
                 action: "REMOVE",
                 dispatch,
-                toastDispatch
             })
             : toggleWishlistItems({
                 product: product, 
                 userID: user._id,
                 action: "ADD",
                 dispatch,
-                toastDispatch
             })
         ) : setShowModal(true)
     }
@@ -61,7 +59,6 @@ export default function ProductDetails() {
                 product: product, 
                 userID: user._id,
                 dispatch,
-                toastDispatch
             })
         ) : setShowModal(true)
     }
