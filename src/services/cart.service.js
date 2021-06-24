@@ -1,19 +1,19 @@
 import axios from "axios";
-import { successNotification } from "../components";
+import { successNotification, successRemoveNotification, errorNotification } from "../components";
 
 export const addCartItems = async({
-    product, userID, dispatch, toastDispatch
+    product, userID, dispatch
 }) => {
     try {
         const {data: {success}} = await axios.post(`/cart/${userID}`, {
             productId: product._id
         }) 
         if(success) {
-            successNotification("Added to cart!");
+            successNotification("Added to Cart!");
             dispatch({type:"ADD_TO_CART", payload: product})
         }
     } catch(err) {
-        toastDispatch({type: "ERROR", payload: "ERROR Occured"})
+        errorNotification("Error Occured")
     }
 }
 
@@ -36,9 +36,9 @@ export const removeFromCart = async({
 }) => {
     const {data: {success}} = await axios.delete(`/cart/${userID}/${productID}`)
     if(success) {
-        toastDispatch({type:"SUCCESS", payload: "Removed from Cart!"});
+        successRemoveNotification("Removed from Cart")
         dispatch({type: "REMOVE_FROM_CART", payload: productID})
     } else {
-        toastDispatch({type:"SUCCESS", payload: "Error Occured!"});
+        errorNotification("Error Occured!")
     }
 }

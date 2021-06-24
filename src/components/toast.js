@@ -19,13 +19,7 @@ export const successRemoveNotification = (message) => {
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
     progress: undefined,
-    style: {
-      color: "#ffffff",
-      backgroundColor: "#007bff",
-    },
   });
 };
 
@@ -35,12 +29,10 @@ export const errorNotification = (message) => {
     autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
     progress: undefined,
-    style: {
-      color: "#ffffff",
-      backgroundColor: "#dc3545",
-    },
+    // style: {
+    //   color: "#ffffff",
+    //   backgroundColor: "#dc3545",
+    // },
   });
 };

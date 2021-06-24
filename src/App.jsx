@@ -29,7 +29,6 @@ function App() {
         closeOnClick
         rtl={false}
         pauseOnFocusLoss={false}
-        draggable
       />
       <Footer/>
     </div>
