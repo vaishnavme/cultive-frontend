@@ -6,13 +6,13 @@ import styles from "./Login.module.css";
 export default function Login() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
-    const { loginCredentialHandler} = useAuth();
+    const { logInUser } = useAuth();
     const navigate = useNavigate();
     const { state } = useLocation();
     
     const loginHandler = async (e) => {
         e.preventDefault();
-        const { success } = await loginCredentialHandler(
+        const { success } = await logInUser(
             userEmail,
             userPassword
         )

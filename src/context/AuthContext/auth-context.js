@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
+import { errorNotification, successNotification } from "../../components";
 
 const AuthContext = createContext();
 
@@ -8,8 +9,7 @@ export const AuthProvider = ({children}) => {
         JSON.parse(localStorage.getItem("authUser"))
     )
 
-    const loginCredentialHandler = async (email, password) => {
-        console.log("ema", email)
+    const logInUser = async (email, password) => {
         try {
             const { data: {data, success} } = await axios.post(`/user/login`, {
                 email,
@@ -17,11 +17,34 @@ export const AuthProvider = ({children}) => {
             })
             console.log("user", data)
             if(success) {
+                successNotification("LogIn!")
                 setUser(data);
                 localStorage?.setItem("authUser", JSON.stringify(data));
             }
             return { data, success };
         } catch (err) {
+            errorNotification("Error Occured!")
+            console.log(err);
+        }
+    }
+
+    const signUpUser = async({name, email, password}) => {
+        try {
+            const { data: {data, success, message} } = await axios.post(`/user/signup`, {
+                name: name,
+                email: email,
+                password: password
+            })
+            if(success) {
+                successNotification("Account Created!")
+                setUser(data);
+                localStorage.setItem("authUser", JSON.stringify(data));
+            } else {
+                errorNotification(message)
+            }
+            return { data, success };
+        } catch (err) {
+            errorNotification("Account Creation Failed!")
             console.log(err);
         }
     }
@@ -34,7 +57,8 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={{
             user, 
-            loginCredentialHandler,
+            logInUser,
+            signUpUser,
             logOutUser
         }}>
             {children}

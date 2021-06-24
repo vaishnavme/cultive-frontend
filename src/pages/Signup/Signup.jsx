@@ -1,15 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context";
 import styles from "./Signup.module.css";
 
 export default function SignUp() {
-    const [username, setUsername] = useState("");
-    const [userEmail, setUserEmail] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+    const { signUpUser } = useAuth();
+    const navigate = useNavigate();
+    const [userInfo, setUserInfo] = useState({
+        name: "",
+        email: "",
+        password: ""
+    });
     
-    const credHandler = () => {
-        setUserEmail("");
-        setUserPassword("");
+    const inputChangeHandler = (e) => {
+        e.preventDefault();
+        setUserInfo((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }))
+    }
+
+    const createAccount = (e) => {
+        e.preventDefault();
+        const { success } = signUpUser(userInfo)
+        if(success) {
+            navigate("/products")
+        }
+        console.log("userinfo: ", userInfo)
     }
 
     return (
@@ -23,17 +40,19 @@ export default function SignUp() {
                     <form>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={(e) =>setUsername(e.target.value)}
-                                value={username}
+                                onChange={inputChangeHandler}
+                                value={userInfo.name}
+                                name="name"
                                 type="text" 
-                                placeholder="username" 
+                                placeholder="Your Name" 
                                 required/>
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
                             <input
-                                onChange={(e) => setUserEmail(e.target.value)}
-                                value={userEmail}
+                                onChange={inputChangeHandler}
+                                value={userInfo.email}
+                                name="email"
                                 type="email" 
                                 placeholder="Enter your email" 
                                 required/>
@@ -41,21 +60,21 @@ export default function SignUp() {
                         </div>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={(e) =>setUserPassword(e.target.value)}
-                                value={userPassword}
+                                onChange={inputChangeHandler}
+                                value={userInfo.password}
+                                name="password"
                                 type="password" 
                                 placeholder="Enter your password" 
                                 required/>
                             <span></span>
                         </div>
                         <button
-                            onClick={credHandler}
+                            onClick={(e) => createAccount(e)}
                             className={`btn btn-secondary ${styles.lognBtn}`}>
                                 Sign Up
                         </button>
                     </form>
                     <p>Already have an account? <Link className={`f-primary`} to="/login">Log in</Link> here</p>
-                    <small>Sign up is still under construstion</small>
                 </div>
             </div>
         </div>
