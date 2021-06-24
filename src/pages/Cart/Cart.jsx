@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { useData } from "../../context";
+import { useData, useAuth } from "../../context";
+import { updateProductQuantity } from "../../services";
 import styles from "./Cart.module.css";
 
 export default function Cart() {
     const navigate = useNavigate();
-    const  { cartItems, dispatch, removeFromCart, quantityHandler, addToWishlist } = useData();
+    const { user } = useAuth();
+    const  { cartItems, dispatch, removeFromCart, addToWishlist } = useData();
     
     console.log(cartItems);
 
@@ -16,6 +18,15 @@ export default function Cart() {
     const wishBtnHandler = (productID) => {
         addToWishlist({product: productID});
         dispatch({type: "REMOVE_FROM_CART", payload: productID})
+    }
+
+    const quantityHandler = ({type, product, quantity}) => {
+        updateProductQuantity({
+            productID: product,
+            userID: user._id,
+            action: type,
+            dispatch
+        })
     }
 
     return (
@@ -43,13 +54,13 @@ export default function Cart() {
                                                     </div>
                                                     <div className={`${styles.productQuantity}`}>
                                                         <button 
-                                                            onClick={() => quantityHandler({
-                                                            type: "INC_QNT",product: item._id, quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i className='bx bx-plus'></i></button>
+                                                            onClick={() => quantityHandler("INC_QNT", item._id, item.quantity)} 
+                                                            className={`btn ${styles.btnIcon}`}><i className='bx bx-plus'></i></button>
                                                         <span className={`ml-2 mr-2 h6`}>{item.quantity}</span>
                                                         <button 
                                                             disabled={item.quantity < 2 ? true : false} 
-                                                            onClick={() => quantityHandler({
-                                                            type: "DEC_QNT",product: item._id,quantity: item.quantity})} className={`btn ${styles.btnIcon}`}><i className='bx bx-minus' ></i></button>
+                                                            onClick={() => quantityHandler("DEC_QNT", item._id, item.quantity)}  
+                                                            className={`btn ${styles.btnIcon}`}><i className='bx bx-minus' ></i></button>
                                                     </div>
                                                     <div className={`${styles.productPrice} h6`}>
                                                         {item.price} ₹

@@ -15,3 +15,16 @@ export const addCartItems = async({
         toastDispatch({type: "ERROR", payload: "ERROR Occured"})
     }
 }
+
+export const updateProductQuantity = async({
+    productID, userID, action, quantity, dispatch
+}) => {
+    const {data:{success}} = await axios.post(`/cart/${userID}/${productID}`, {
+        quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
+    })
+    if(success) {
+        dispatch({type: action, payload: productID})
+    } else {
+        dispatch({type: action, payload: productID})
+    }
+}

@@ -10,7 +10,7 @@ import styles from "./ProductDetails.module.css";
 export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
-    const {productData, cartItems, wishListItems, updateCartProducts, isLoading, setLoading } = useData();
+    const {productData, cartItems, wishListItems, isLoading, setLoading } = useData();
     const { user } = useAuth();
     const { dispatch } = useData();
     const { toastDispatch } = useToast();

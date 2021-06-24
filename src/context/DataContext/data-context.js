@@ -65,23 +65,6 @@ export const DataProvider = ({children}) => {
         }
     }
     
-    // cart server operations
-    const updateCartProducts = async ({product}) => {
-        try {
-            const {data: {success}} = await axios.post(`/cart/${user._id}`, {
-                cartItems: {
-                    product: product._id
-                }
-            }) 
-            if(success) {
-                toastDispatch({type:"SUCCESS", payload: "Added to Cart!"});
-                dispatch({type:"ADD_TO_CART", payload: product})
-            }
-        } catch(err) {
-            toastDispatch({type: "ERROR", payload: "ERROR Occured"})
-        }
-    }
-
     const quantityHandler= async({type, product, quantity}) => {
         const {data:{success}} = await axios.post(`/cart/${user._id}/${product}`, {
             quantity: type === "INC_QNT" ? quantity + 1 : quantity - 1
@@ -119,7 +102,6 @@ export const DataProvider = ({children}) => {
             sortBy,
             rating,
             dispatch,
-            updateCartProducts,
             removeFromCart,
             quantityHandler,
             isLoading,
