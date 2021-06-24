@@ -4,7 +4,6 @@ import styles from "./Products.module.css";
 
 export default function Products() {
     const { productData, showInventoryAll, sortBy, rating, categories, dispatch, isLoading } = useData();
-    
     const categoryList = productData.map((property) => property.category).filter(onlyUniqueValues);
 
     const getSortedData = (productList, sortBy) => {
@@ -19,7 +18,6 @@ export default function Products() {
     }
 
     const getProductByRatings = (productList, rating) => {
-        console.log("sort-rating: ", rating)
         if(rating !== null) {
             return productList.filter((product) => product.rating >= rating)
         } else {
@@ -39,6 +37,7 @@ export default function Products() {
     
     return (
         <section>
+            {isLoading && <Loader/>}
             <div className={`${styles.header}`}>
                 <div className={`${styles.headerText} h1`}>Products</div>
             </div>

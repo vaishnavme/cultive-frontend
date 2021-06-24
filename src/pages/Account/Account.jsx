@@ -9,7 +9,8 @@ export default function Login() {
     const setPasswordFieldVisible = () => setVisible((prevState) => !prevState)
     
     return (
-        <section className={`${styles.wrapper}`}>
+        <div>
+            <section className={`${styles.wrapper}`}>
             <div className={`${styles.formSection}`}>
                 <div className={`${styles.header}`}>
                     <h5>Hi {user.name}</h5>
@@ -49,5 +50,6 @@ export default function Login() {
             </div>
             
         </section>
+        </div>
     )
 }

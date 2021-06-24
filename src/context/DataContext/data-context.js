@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
-import { useAuth, useLoader, useToast } from "..";
+import { useAuth, useLoader } from "..";
 import { dataReducer } from "./data-reducer";
 
 const DataContext = createContext();
@@ -16,10 +16,8 @@ const initialState = {
 }
 
 export const DataProvider = ({children}) => {
-    
     const { user } = useAuth();
-    const { toastDispatch } = useToast();
-    const {isLoading, setLoading} = useLoader();
+    const { isLoading ,setLoading} = useLoader();
     
     const [{
         productData,
@@ -81,8 +79,7 @@ export const DataProvider = ({children}) => {
             sortBy,
             rating,
             dispatch,
-            isLoading,
-            setLoading
+            isLoading
         }}>
             {children}
         </DataContext.Provider>

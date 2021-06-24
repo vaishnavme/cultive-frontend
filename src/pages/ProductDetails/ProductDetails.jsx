@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useData, useAuth, useToast } from "../../context";
+import { useData, useAuth, useToast, useLoader } from "../../context";
 import axios from "axios";
 import { toggleWishlistItems } from "../../services";
 import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
@@ -10,7 +10,8 @@ import styles from "./ProductDetails.module.css";
 export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
-    const {productData, cartItems, wishListItems, isLoading, setLoading } = useData();
+    const { productData, cartItems, wishListItems } = useData();
+    const { isLoading, setLoading } = useLoader();
     const { user } = useAuth();
     const { dispatch } = useData();
     const { toastDispatch } = useToast();
@@ -22,7 +23,6 @@ export default function ProductDetails() {
             try {
                 setLoading(true)
                 const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${productID}`)
-                console.log("product: ", product)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
