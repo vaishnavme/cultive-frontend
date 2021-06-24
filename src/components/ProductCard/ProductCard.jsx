@@ -32,13 +32,13 @@ export const ProductCard = ({product}) => {
         ) : setShowModal(true)
     }
 
-    const modalCloseBtn = () => {
+    const setModelVisibility = () => {
         setShowModal(() => !showModal);
     }
 
     return (
         <>
-        {showModal && <Modal modalCloseBtn={modalCloseBtn}/>}
+        {showModal && <Modal setModelVisibility={setModelVisibility}/>}
         <div className={`${styles.productContainer}`}>
             <Link to={`/products/${product._id}`}>
                 <div className={`${styles.productCard}`}>
