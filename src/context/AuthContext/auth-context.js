@@ -26,7 +26,7 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    const logOutUser = async () => {
+    const logOutUser = () => {
         localStorage?.removeItem("authUser");
         setUser(null);
     }
