@@ -2,18 +2,8 @@ import { useState } from "react";
 import styles from "./FilterBox.module.css";
 
 export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
-        const [isVisible, setVisible] = useState(false);
-
-        const setFilterBoxVisible = () => setVisible((prevState) => !prevState)
-    
-        const filterBoxStyle = {
-            borderRadius: "0.2rem",
-            backgroundColor: "#f5f5ff",
-            height: isVisible ? "auto" : 0,
-            overflow: "hidden",
-            opacity: isVisible ? 1 : 0,
-            transition: "all 800ms ease-in"
-        }
+    const [isVisible, setVisible] = useState(false);
+    const setFilterBoxVisible = () => setVisible((prevState) => !prevState)
 
     return (
         <div className={`${styles.wrapper}`}>
