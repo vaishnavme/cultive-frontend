@@ -1,22 +1,20 @@
 import { toast } from "react-toastify";
 
 export const successNotification = (message) => {
-  return toast.dark(message, {
+  return toast.success(message, {
     position: "bottom-right",
-    autoClose: 3000,
+    autoClose: 2500,
     hideProgressBar: false,
     closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
     progress: undefined,
     style: {
-      color: "rgb(183, 223, 185)",
-      backgroundColor: "rgb(7, 17, 7)",
+      color: "#ffffff",
+      backgroundColor: "#28a745",
     },
   });
 };
 export const successRemoveNotification = (message) => {
-  return toast.dark(message, {
+  return toast.info(message, {
     position: "bottom-right",
     autoClose: 3000,
     hideProgressBar: false,
@@ -25,8 +23,24 @@ export const successRemoveNotification = (message) => {
     draggable: true,
     progress: undefined,
     style: {
-      color: "rgb(250, 179, 174)",
-      backgroundColor: "rgb(24, 6, 5)",
+      color: "#ffffff",
+      backgroundColor: "#007bff",
+    },
+  });
+};
+
+export const errorNotification = (message) => {
+  return toast.warning(message, {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    style: {
+      color: "#ffffff",
+      backgroundColor: "#dc3545",
     },
   });
 };
