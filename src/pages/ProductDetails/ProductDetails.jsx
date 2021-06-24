@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useData, useAuth } from "../../context";
+import { useData, useAuth, useToast } from "../../context";
 import axios from "axios";
+import { toggleWishlistItems } from "../../services";
 import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
-    const {productData, cartItems, wishListItems, updateCartProducts, addToWishlist, removeFromWishlist, isLoading, setLoading, } = useData();
-    const  { user } = useAuth();
+    const {productData, cartItems, wishListItems, updateCartProducts, isLoading, setLoading } = useData();
+    const { user } = useAuth();
+    const { dispatch } = useData();
+    const { toastDispatch } = useToast();
     const { productID } = useParams();
     const navigate = useNavigate();
 
@@ -30,11 +33,23 @@ export default function ProductDetails() {
         // eslint-disable-next-line 
     },[productID]);
 
-    const wishBtnHandler = (productID) => {
+    const addToWishlist = (product) => {
         user ? (
-            alreadyExist(wishListItems, productID) ?
-            removeFromWishlist({product: productID})
-            : addToWishlist({product: productID})
+            alreadyExist(wishListItems, product._id) ?
+            toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "REMOVE",
+                dispatch,
+                toastDispatch
+            })
+            : toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "ADD",
+                dispatch,
+                toastDispatch
+            })
         ) : setShowModal(true)
     }
 
@@ -92,7 +107,7 @@ export default function ProductDetails() {
 
                         <div className={`d-flex`}>
                             <button className={`btn ${styles.btnSecondary}`}
-                                onClick={() => wishBtnHandler(product._id)}>
+                                onClick={() => addToWishlist(product)}>
                                 {alreadyExist(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}
                             </button>
                             <button 

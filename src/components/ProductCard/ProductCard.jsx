@@ -12,7 +12,7 @@ export const ProductCard = ({product}) => {
     const { toastDispatch } = useToast();
     const [showModal, setShowModal] = useState(false);
 
-    const wishBtnHandler = (product) => {
+    const addToWishlist = (product) => {
         user ? (
             alreadyExist(wishListItems, product._id) ?
             toggleWishlistItems({
@@ -52,7 +52,7 @@ export const ProductCard = ({product}) => {
             <div>
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
-                    onClick={() => wishBtnHandler(product)}>
+                    onClick={() => addToWishlist(product)}>
                     { 
                         alreadyExist(wishListItems, product._id) ? 
                             <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> 
