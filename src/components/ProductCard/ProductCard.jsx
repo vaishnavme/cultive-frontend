@@ -1,19 +1,34 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useData, useAuth } from "../../context";
-import { alreadyExist, Modal } from "../index";
+import { useData, useAuth, useToast } from "../../context";
+import { toggleWishlistItems } from "../../services";
+import { alreadyExist, Modal } from "..";
 import styles from "./ProductCard.module.css";
 
 export const ProductCard = ({product}) => {
-    const { wishListItems, addToWishlist, removeFromWishlist } = useData();
+    const { wishListItems } = useData();
     const { user } = useAuth();
+    const { dispatch } = useData();
+    const { toastDispatch } = useToast();
     const [showModal, setShowModal] = useState(false);
 
-    const wishBtnHandler = (productID) => {
+    const wishBtnHandler = (product) => {
         user ? (
-            alreadyExist(wishListItems, productID) ?
-            removeFromWishlist({product: productID})
-            : addToWishlist({product: productID})
+            alreadyExist(wishListItems, product._id) ?
+            toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "REMOVE",
+                dispatch,
+                toastDispatch
+            })
+            : toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "ADD",
+                dispatch,
+                toastDispatch
+            })
         ) : setShowModal(true)
     }
 
@@ -37,8 +52,12 @@ export const ProductCard = ({product}) => {
             <div>
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
-                    onClick={() => wishBtnHandler(product._id)}>
-                    {alreadyExist(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}                
+                    onClick={() => wishBtnHandler(product)}>
+                    { 
+                        alreadyExist(wishListItems, product._id) ? 
+                            <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> 
+                            : <i className='bx bx-heart' ></i>
+                    }                
                 </button>
             </div>
         </div>

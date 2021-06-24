@@ -6,7 +6,7 @@ import styles from "./Wishlist.module.css";
 export default function Wishlist() {
     const navigate = useNavigate();
     const { wishListItems } = useData();
-    
+
     return (
         <div className={`${styles.main}`}>
             {
