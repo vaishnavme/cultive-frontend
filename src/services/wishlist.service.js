@@ -3,7 +3,6 @@ import axios from "axios";
 export const toggleWishlistItems = async({
     product, userID, action, dispatch, toastDispatch
 }) => {
-    console.log("action ", action)
     try {
         const {data: {success}} = await axios.post(`/wishlist/${userID}/${product._id}`, {
             type: action

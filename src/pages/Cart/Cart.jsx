@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useData, useAuth, useToast } from "../../context";
-import { updateProductQuantity, removeFromCart } from "../../services";
+import { alreadyExist } from "../../components";
+import { updateProductQuantity, removeFromCart, toggleWishlistItems } from "../../services";
 import styles from "./Cart.module.css";
 
 export default function Cart() {
     const navigate = useNavigate();
     const { user } = useAuth();
     const { toastDispatch } = useToast();
-    const  { cartItems, dispatch, addToWishlist } = useData();
+    const  { cartItems, wishListItems, dispatch } = useData();
     
     console.log(cartItems);
 
@@ -16,9 +17,22 @@ export default function Cart() {
     }
     const cartTotal = totalPrice(cartItems) || 0;
 
-    const wishBtnHandler = (productID) => {
-        addToWishlist({product: productID});
-        dispatch({type: "REMOVE_FROM_CART", payload: productID})
+    const addToWishlist = (product) => {
+        alreadyExist(wishListItems, product._id) ?
+        toggleWishlistItems({
+            product: product, 
+            userID: user._id,
+            action: "REMOVE",
+            dispatch,
+            toastDispatch
+        })
+        : toggleWishlistItems({
+            product: product, 
+            userID: user._id,
+            action: "ADD",
+            dispatch,
+            toastDispatch
+        })
     }
 
     const removeItem = ({product}) => {
@@ -77,7 +91,13 @@ export default function Cart() {
                                                         {item.price} ₹
                                                     </div>
                                                     <div className={`${styles.productAction}`}>
-                                                        <button onClick={() => wishBtnHandler(item._id)} className={`btn ${styles.btnIcon}`}><i className='bx bx-heart'></i></button>
+                                                        <button onClick={() => addToWishlist(item._id)} className={`btn ${styles.btnIcon}`}>
+                                                        { 
+                                                            alreadyExist(wishListItems, item._id) ? 
+                                                                <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> 
+                                                                : <i className='bx bx-heart' ></i>
+                                                        }    
+                                                        </button>
                                                         <button onClick={() => removeItem({product: item._id})} className={`btn ${styles.btnIcon}`}><i className='bx bx-x'></i></button>
                                                     </div>
                                                 </div>

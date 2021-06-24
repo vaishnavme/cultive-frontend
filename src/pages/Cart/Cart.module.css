@@ -66,6 +66,9 @@
 .btnIcon {
     font-size: 1.1rem;
 }
+.fillWishlist {
+    color: var(--red-heart);
+}
 .cardCheck {
     padding: 1rem;
     min-height: 30rem;
