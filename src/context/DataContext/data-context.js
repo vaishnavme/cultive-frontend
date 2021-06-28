@@ -66,19 +66,16 @@ export const DataProvider = ({children}) => {
         }
     }
 
-
+    useEffect(() => {
+         getProductData();
+        // eslint-disable-next-line
+    },[])
 
     useEffect(() => {
         token && getUserData();
         console.log("User data loading...")
         // eslint-disable-next-line
     },[user, token]);
-
-    useEffect(() => {
-        productData.length === 0 && getProductData();
-        // eslint-disable-next-line
-    },[])
-
 
     return (
         <DataContext.Provider value={{
