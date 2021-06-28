@@ -16,7 +16,7 @@ const initialState = {
 }
 
 export const DataProvider = ({children}) => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const { isLoading ,setLoading} = useLoader();
     
     const [{
@@ -63,11 +63,19 @@ export const DataProvider = ({children}) => {
         }
     }
 
+
+
     useEffect(() => {
-        getProductData();
-        getUserData();
-         // eslint-disable-next-line
-    },[]);
+        token && getUserData();
+        console.log("User data loading...")
+        // eslint-disable-next-line
+    },[user, token]);
+
+    useEffect(() => {
+        productData.length === 0 && getProductData();
+        // eslint-disable-next-line
+    },[])
+
 
     return (
         <DataContext.Provider value={{

@@ -13,6 +13,11 @@ export const AuthProvider = ({children}) => {
         JSON.parse(localStorage.getItem("authToken"))
     )
 
+    if (token) {
+        console.log("token set");
+        axios.defaults.headers.common["Authorization"] = `${token}`;
+    }
+
     const logInUser = async (email, password) => {
         try {
             const { data: {user, success, token} } = await axios.post(`/user/login`, {
@@ -65,6 +70,7 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={{
             user, 
+            token,
             logInUser,
             signUpUser,
             logOutUser
