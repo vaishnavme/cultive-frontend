@@ -2,15 +2,14 @@
 @import "react-toastify/dist/ReactToastify.min.css";
 
 :root {
+  --green: #5fbe23;
+  --dark-black: #0E1026;
   --white: #ffffff;
   --off-white: #fafafa;
   --light-gray: #6b6b6b;
   --light-yellow: #fff9e0;
-  --dark-black: #0E1026;
-  --heighlight: #5fbe23;
-  --red-heart: #f3153a;
+  --red: #f3153a;
   --black: #000000;
-  --box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
 }
 * {
   margin: 0;
