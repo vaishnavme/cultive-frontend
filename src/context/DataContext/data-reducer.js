@@ -71,6 +71,14 @@ export const dataReducer = (state, {type, payload}) => {
                 ? state.categories.filter((value) => value !== payload)
                 : state.categories.concat(payload)
             }
+        
+        case "TOGGLE_SIZE": 
+            return {
+                ...state,
+                sizeSelect: state.sizeSelect.some((value) => value === payload)
+                ? state.sizeSelect.filter((value) => value !== payload)
+                : state.sizeSelect.concat(payload)
+            }
 
         case "CLEAR_ALL_FILTERS":
             return {

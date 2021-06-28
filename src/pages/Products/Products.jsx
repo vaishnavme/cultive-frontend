@@ -3,9 +3,11 @@ import { ProductCard, FilterBox, onlyUniqueValues, Loader } from "../../componen
 import styles from "./Products.module.css";
 
 export default function Products() {
-    const { productData, showInventoryAll, sortBy, rating, categories, dispatch, isLoading } = useData();
-    const categoryList = productData.map((property) => property.category).filter(onlyUniqueValues);
+    const { productData, showInventoryAll, sortBy, rating, categories, sizeSelect,dispatch, isLoading } = useData();
 
+    const categoryList = productData.map((property) => property.category).filter(onlyUniqueValues);
+    const sizeList = productData.map((property) => property.size).filter(onlyUniqueValues);
+   
     const getSortedData = (productList, sortBy) => {
         if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {
             return productList.sort((a, b) => b["price"] - a["price"]);
@@ -26,14 +28,15 @@ export default function Products() {
     }
     
     const getFilteredData = (
-        productList,{ showInventoryAll, categories })  => {
+        productList,{ showInventoryAll, categories, sizeSelect })  => {
         return productList
             .filter(product => categories.length > 0 ? categories.includes(product.category) : product)
+            .filter(product => sizeSelect.length > 0 ? sizeSelect.includes(product.size): product)
             .filter(({ inStock }) => (showInventoryAll ? true : inStock))
       }
     const filterByRating = getProductByRatings(productData, rating)
     const sortedData = getSortedData(filterByRating, sortBy);
-    const filteredData = getFilteredData(sortedData, {showInventoryAll, categories});
+    const filteredData = getFilteredData(sortedData, {showInventoryAll, categories, sizeSelect});
     
     return (
         <section>
@@ -45,6 +48,8 @@ export default function Products() {
                 showInventoryAll={showInventoryAll}
                 categoryList={categoryList}
                 categories={categories}
+                sizeSelect={sizeSelect}
+                sizeList={sizeList}
                 sortBy={sortBy}
                 rating={rating}
                 dispatch={dispatch}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./FilterBox.module.css";
 
-export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
+export const FilterBox = ({dispatch, categoryList, categories, sizeSelect, sizeList, rating}) => {
     const [isVisible, setVisible] = useState(false);
     const setFilterBoxVisible = () => setVisible((prevState) => !prevState)
 
@@ -73,7 +73,22 @@ export const FilterBox = ({dispatch, categoryList, categories, rating}) => {
                         </ul>
                     </div>
                     <div className={`${styles.box3}`}>
-                        <div className={`${styles.filterName}`}>PRICE</div>
+                        <div className={`${styles.filterName}`}>Extra Filters</div>
+                        <ul className={`mt-2 mb-2`}>
+                            {
+                                sizeList.map((size) => (
+                                <li 
+                                    key={size}
+                                    className={`d-flex flex-align-center`}>
+                                <CheckboxInput 
+                                    checked={sizeSelect.some(value => value === size)}
+                                    onChange={() => dispatch({type: "TOGGLE_SIZE", payload: size})}
+                                    name={size}
+                                />
+                            </li>
+                            ))
+                        }
+                        </ul>
                     </div>
                 </div>
             </div>

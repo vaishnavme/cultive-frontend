@@ -11,6 +11,7 @@ const initialState = {
     wishListItems: [],
     showInventoryAll: [],
     categories: [],
+    sizeSelect: [],
     rating: null,
     sortBy: null
 }
@@ -25,6 +26,7 @@ export const DataProvider = ({children}) => {
         wishListItems,
         showInventoryAll,
         categories,
+        sizeSelect,
         sortBy,
         rating
     }, dispatch] = useReducer(dataReducer, initialState)
@@ -84,6 +86,7 @@ export const DataProvider = ({children}) => {
             wishListItems,
             showInventoryAll,
             categories,
+            sizeSelect,
             sortBy,
             rating,
             dispatch,
