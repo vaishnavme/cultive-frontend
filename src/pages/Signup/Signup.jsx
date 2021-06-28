@@ -26,7 +26,7 @@ export default function SignUp() {
         const { success, message } = await signUpUser(userInfo);
         
         if(success) {
-            successNotification(message);
+            successNotification("Account Created!!");
             navigate("/products")
         } else {
             errorNotification(message);

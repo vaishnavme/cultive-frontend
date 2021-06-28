@@ -85,7 +85,7 @@ export default function Cart() {
                                                         {item.price} ₹
                                                     </div>
                                                     <div className={`${styles.productAction}`}>
-                                                        <button onClick={() => addToWishlist(item._id)} className={`btn ${styles.btnIcon}`}>
+                                                        <button onClick={() => addToWishlist(item)} className={`btn ${styles.btnIcon}`}>
                                                         { 
                                                             alreadyExist(wishListItems, item._id) ? 
                                                                 <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> 
