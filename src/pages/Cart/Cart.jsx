@@ -32,7 +32,7 @@ export default function Cart() {
 
     const removeItem = ({product}) => {
         removeFromCart({
-            productID: product,
+            productId: product,
             userID: user._id,
             dispatch,
         })
@@ -40,7 +40,7 @@ export default function Cart() {
 
     const quantityHandler = ({type, product, quantity}) => {
         updateProductQuantity({
-            productID: product,
+            productId: product,
             userID: user._id,
             action: type,
             quantity,

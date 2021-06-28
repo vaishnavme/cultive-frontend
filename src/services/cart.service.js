@@ -18,26 +18,26 @@ export const addCartItems = async({
 }
 
 export const updateProductQuantity = async({
-    productID, userID, action, quantity, dispatch
+    productId, userID, action, quantity, dispatch
 }) => {
     console.log("action ", action);
-    const {data:{success}} = await axios.post(`/cart/${userID}/${productID}`, {
+    const {data:{success}} = await axios.post(`/cart/${userID}/${productId}`, {
         quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
     })
     if(success) {
-        dispatch({type: action, payload: productID})
+        dispatch({type: action, payload: productId})
     } else {
-        dispatch({type: action, payload: productID})
+        dispatch({type: action, payload: productId})
     }
 }
 
 export const removeFromCart = async({
-    productID, userID, dispatch, toastDispatch
+    productId, userID, dispatch
 }) => {
-    const {data: {success}} = await axios.delete(`/cart/${userID}/${productID}`)
+    const {data: {success}} = await axios.delete(`/cart/${userID}/${productId}`)
     if(success) {
         successRemoveNotification("Removed from Cart")
-        dispatch({type: "REMOVE_FROM_CART", payload: productID})
+        dispatch({type: "REMOVE_FROM_CART", payload: productId})
     } else {
         errorNotification("Error Occured!")
     }
