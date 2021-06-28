@@ -67,7 +67,7 @@
     font-size: 1.1rem;
 }
 .fillWishlist {
-    color: var(--red-heart);
+    color: var(--red);
 }
 .cardCheck {
     padding: 1rem;

@@ -58,7 +58,7 @@
     border: 2px solid var(--black) !important;
 }
 .fillWishlist {
-    color: var(--red-heart);
+    color: var(--red);
 }
 @media screen and (max-width : 768px) {
     .productSummary {
