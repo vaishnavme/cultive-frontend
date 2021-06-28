@@ -5,7 +5,6 @@ import { useAuth, useLoader } from "..";
 import { dataReducer } from "./data-reducer";
 
 const DataContext = createContext();
-console.log(BASE_URL)
 
 const initialState = {
     productData: [],
