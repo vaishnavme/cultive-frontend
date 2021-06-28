@@ -6,7 +6,7 @@
   width: 100%;
   height: 3rem;
   padding: 1rem 2rem;
-  background-color: #FFF;
+  background-color: var(--white);
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -81,7 +81,7 @@
 }
   
 .navLink:hover {
-  color: var(--heighlight);
+  color: var(--green);
 }
   
 /*Show menu*/
@@ -170,7 +170,7 @@
     color: var(--dark-black);
   }
   .navLink:hover {
-    color: var(--heighlight);
+    color: var(--green);
   }
   /*Active link new color*/
   .dropdown {

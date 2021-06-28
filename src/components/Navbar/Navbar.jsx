@@ -44,6 +44,10 @@ export const Navbar = () => {
                             </li>
 
                             <li className={`${styles.navItem}`}>
+                                <NavLink to="/products" activeStyle={activeStyle} className={`${styles.navLink}`}>Store</NavLink>
+                            </li>
+
+                            <li className={`${styles.navItem}`}>
                                 <NavLink to="/cart" activeStyle={activeStyle} className={`${styles.navLink}`}>Cart</NavLink>
                             </li>
 

@@ -8,7 +8,7 @@
     z-index: 2;
 }
 .fillWishlist {
-    color: var(--red-heart);
+    color: var(--red);
 }
 .productCard {
     height: auto;

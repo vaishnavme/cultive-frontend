@@ -73,7 +73,7 @@ export const FilterBox = ({dispatch, categoryList, categories, sizeSelect, sizeL
                         </ul>
                     </div>
                     <div className={`${styles.box3}`}>
-                        <div className={`${styles.filterName}`}>Extra Filters</div>
+                        <div className={`${styles.filterName}`}>Sizes</div>
                         <ul className={`mt-2 mb-2`}>
                             {
                                 sizeList.map((size) => (

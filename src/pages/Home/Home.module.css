@@ -6,6 +6,7 @@
     padding: 0.5rem;
 }
 .banner {
+    position: relative;
     max-width: 700px;
 }
 .bannerImg {
@@ -14,6 +15,13 @@
     height: auto;
     margin: 1rem auto;
     border-radius: 0.5rem;
+}
+.bannerInfo {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translateX(-50%);
+    font-size: 2rem;
 }
 @media screen and (max-width: 1200px) {
     .bannerSection {
