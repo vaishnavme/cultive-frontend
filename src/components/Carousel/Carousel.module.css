@@ -11,6 +11,13 @@
     height: auto;
     border-radius: 0.5rem;
 }
+.slideButton {
+    color: var(--green);
+    padding: 0.6rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+    letter-spacing: 1.1px;
+}
 .carouselBtn {
     position: absolute;
     top: 50%;
@@ -22,7 +29,7 @@
     z-index: 8;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.carouselBtn:hover {
+.carouselBtn:hover, .slideButton:hover {
     color: var(--white);
     background-color: var(--heighlight);
 }

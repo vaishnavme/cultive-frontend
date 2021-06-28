@@ -1,8 +1,10 @@
 import { useState, Fragment } from "react";
 import  {carouseldata} from "./carouselData";
 import styles from "./Carousel.module.css";
+import { useNavigate } from "react-router";
 
 export const Carousel = () => {
+    const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
     const slideLength = carouseldata.length;
     
@@ -40,6 +42,7 @@ export const Carousel = () => {
                             />
                             <div className={`${styles.slideText}`}>
                                 <p className={`${styles.tagline}`}>{slide.tagline}</p>
+                                <button onClick={() => navigate("/products")} className={`${styles.slideButton}`}>SHOP</button>
                             </div>
                            </Fragment>
                         }
