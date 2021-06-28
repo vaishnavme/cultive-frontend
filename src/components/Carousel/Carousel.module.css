@@ -31,7 +31,7 @@
 }
 .carouselBtn:hover, .slideButton:hover {
     color: var(--white);
-    background-color: var(--heighlight);
+    background-color: var(--green);
 }
 .right {
     right: 1rem;
