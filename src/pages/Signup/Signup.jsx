@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context";
+import { errorNotification, successNotification } from "../../components";
 import styles from "./Signup.module.css";
 
 export default function SignUp() {
@@ -20,11 +21,15 @@ export default function SignUp() {
         }))
     }
 
-    const createAccount = (e) => {
+    const createAccount = async (e) => {
         e.preventDefault();
-        const { success } = signUpUser(userInfo)
+        const { success, message } = await signUpUser(userInfo);
+        
         if(success) {
+            successNotification(message);
             navigate("/products")
+        } else {
+            errorNotification(message);
         }
         console.log("userinfo: ", userInfo)
     }

@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 export const successNotification = (message) => {
   return toast.success(message, {
     position: "bottom-right",
-    autoClose: 2500,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     progress: undefined,
@@ -16,7 +16,7 @@ export const successNotification = (message) => {
 export const successRemoveNotification = (message) => {
   return toast.info(message, {
     position: "bottom-right",
-    autoClose: 2500,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     progress: undefined,
@@ -26,13 +26,9 @@ export const successRemoveNotification = (message) => {
 export const errorNotification = (message) => {
   return toast.warning(message, {
     position: "bottom-right",
-    autoClose: 2500,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     progress: undefined,
-    // style: {
-    //   color: "#ffffff",
-    //   backgroundColor: "#dc3545",
-    // },
   });
 };

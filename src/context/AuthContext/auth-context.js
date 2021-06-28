@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
-import { errorNotification, successNotification } from "../../components";
+import { errorNotification } from "../../components";
 
 const AuthContext = createContext();
 
@@ -8,20 +8,26 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(
         JSON.parse(localStorage.getItem("authUser"))
     )
+    // eslint-disable-next-line
+    const [token, setToken] = useState(
+        JSON.parse(localStorage.getItem("authToken"))
+    )
 
     const logInUser = async (email, password) => {
         try {
-            const { data: {data, success} } = await axios.post(`/user/login`, {
+            const { data: {user, success, token} } = await axios.post(`/user/login`, {
                 email,
                 password
             })
-            console.log("user", data)
+            
             if(success) {
-                successNotification("LogIn!")
-                setUser(data);
-                localStorage?.setItem("authUser", JSON.stringify(data));
+                setUser(user);
+                setToken(token);
+                axios.defaults.headers.common["Authorization"] = `${token}`
+                localStorage.setItem("authUser", JSON.stringify(user));
+                localStorage.setItem("authToken", JSON.stringify(token));
             }
-            return { data, success };
+            return { user, success };
         } catch (err) {
             errorNotification("Error Occured!")
             console.log(err);
@@ -30,28 +36,30 @@ export const AuthProvider = ({children}) => {
 
     const signUpUser = async({name, email, password}) => {
         try {
-            const { data: {data, success, message} } = await axios.post(`/user/signup`, {
+            const { data: {success, user, token, message} } = await axios.post(`/user/signup`, {
                 name: name,
                 email: email,
                 password: password
             })
             if(success) {
-                successNotification("Account Created!")
-                setUser(data);
-                localStorage.setItem("authUser", JSON.stringify(data));
-            } else {
-                errorNotification(message)
-            }
-            return { data, success };
+                console.log("token");
+                setUser(user);
+                setToken(token);
+                axios.defaults.headers.common["Authorization"] = `${token}`
+                localStorage.setItem("authUser", JSON.stringify(user));
+                localStorage.setItem("authToken", JSON.stringify(token));
+            } 
+            return { success, message };
         } catch (err) {
-            errorNotification("Account Creation Failed!")
             console.log(err);
         }
     }
 
     const logOutUser = () => {
         localStorage?.removeItem("authUser");
+        localStorage?.removeItem("authToken");
         setUser(null);
+        setToken(null);
     }
 
     return (
