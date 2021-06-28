@@ -1,11 +1,12 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import { successNotification, successRemoveNotification, errorNotification } from "../components";
 
 export const toggleWishlistItems = async({
     product, userID, action, dispatch
 }) => {
     try {
-        const {data: {success}} = await axios.post(`/wishlist/${userID}/${product._id}`, {
+        const {data: {success}} = await axios.post(`${BASE_URL}/wishlist/${userID}/${product._id}`, {
             type: action
         });
         if(success) {

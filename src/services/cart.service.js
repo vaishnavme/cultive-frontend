@@ -1,11 +1,12 @@
 import axios from "axios";
+import { BASE_URL } from "../api";
 import { successNotification, successRemoveNotification, errorNotification } from "../components";
 
 export const addCartItems = async({
     product, userID, dispatch
 }) => {
     try {
-        const {data: {success}} = await axios.post(`/cart/${userID}`, {
+        const {data: {success}} = await axios.post(`${BASE_URL}/cart/${userID}`, {
             productId: product._id
         }) 
         if(success) {
@@ -21,7 +22,7 @@ export const updateProductQuantity = async({
     productId, userID, action, quantity, dispatch
 }) => {
     console.log("action ", action);
-    const {data:{success}} = await axios.post(`/cart/${userID}/${productId}`, {
+    const {data:{success}} = await axios.post(`${BASE_URL}/cart/${userID}/${productId}`, {
         quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
     })
     if(success) {
@@ -34,7 +35,7 @@ export const updateProductQuantity = async({
 export const removeFromCart = async({
     productId, userID, dispatch
 }) => {
-    const {data: {success}} = await axios.delete(`/cart/${userID}/${productId}`)
+    const {data: {success}} = await axios.delete(`${BASE_URL}/cart/${userID}/${productId}`)
     if(success) {
         successRemoveNotification("Removed from Cart")
         dispatch({type: "REMOVE_FROM_CART", payload: productId})

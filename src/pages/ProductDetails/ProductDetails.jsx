@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useData, useAuth, useLoader } from "../../context";
 import axios from "axios";
+import {BASE_URL}  from "../../api";
 import { toggleWishlistItems } from "../../services";
 import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
 import { addCartItems } from "../../services";
@@ -22,7 +23,7 @@ export default function ProductDetails() {
         (async () => {
             try {
                 setLoading(true)
-                const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${productID}`)
+                const {data: {product}} = await axios.get(`${BASE_URL}/products/${productID}`)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
