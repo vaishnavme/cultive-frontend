@@ -1,8 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account } from "./pages";
-import { Navbar, Footer } from "./components";
+import { PrivateRoute, Navbar, Footer } from "./components";
 import { ToastContainer, Slide } from "react-toastify";
-import { PrivateRoute } from "./api";
 
 function App() {
   return (
