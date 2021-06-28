@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context";
-import { errorNotification } from "../../components";
+import { errorNotification, successNotification } from "../../components";
 import styles from "./Login.module.css";
 
 export default function Login() {
@@ -18,6 +18,7 @@ export default function Login() {
             userPassword
         )
         if(success) {
+            successNotification("Login Successfull!!")
             navigate(state?.from ? state.from : "/", { replace: true });
         } else {
             errorNotification("Error Ocuured")
