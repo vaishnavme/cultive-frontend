@@ -7,7 +7,7 @@ export const Footer = () => {
             <div className={`${styles.footer}`}>
                 <div>
                     <div className={`h4 mb-2`}>GardnUp</div>
-                    <a className={`${styles.socialLink} mb-3`} href="www.github.com/vaishnavme" target="_blank">
+                    <a className={`${styles.socialLink} mb-3`} href="https://github.com/vaishnavme/gardnup-frontend" rel="noreferrer" target="_blank">
                         <i className={`bx bxl-github h4 mr-2`}></i> Source Code
                     </a>
                     <div>
@@ -15,17 +15,17 @@ export const Footer = () => {
                         <div>
                            <ul className={`${styles.sociallist}`}>
                                 <li>
-                                    <a href="www.github.com/vaishnavme" className={`${styles.socialLink}`} target="_blank">
+                                    <a href="https://github.com/vaishnavme" className={`${styles.socialLink}`} rel="noreferrer" target="_blank">
                                         <i className={`bx bxl-github h4`}></i> 
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="www.github.com/vaishnavme" className={`${styles.socialLink}`} target="_blank">
+                                    <a href="https://www.linkedin.com/in/vaishnav-chandurkar" className={`${styles.socialLink}`} rel="noreferrer" target="_blank">
                                         <i className={`bx bxl-linkedin h4`}></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="www.github.com/vaishnavme" className={`${styles.socialLink}`} target="_blank">
+                                    <a href="https://twitter.com/vaishnavs0?=09" className={`${styles.socialLink}`} rel="noreferrer" target="_blank">
                                         <i className={`bx bxl-twitter h4`}></i>
                                     </a>
                                 </li>
