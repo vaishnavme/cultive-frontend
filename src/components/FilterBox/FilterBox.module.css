@@ -78,6 +78,7 @@
     .action {
         margin: auto;
         flex-wrap: wrap;
+        position: relative;
     }
     .actionSelect {
         margin: 1rem;
@@ -99,5 +100,23 @@
         grid-template-areas: 
         "box1 box2"
         "box3 box3";
+    }
+    .filterContainer {
+        position: absolute;
+        border-radius: 0.2rem;
+        place-items: center;
+        overflow: hidden;
+        z-index: 8;
+        max-height: 100%;
+        width: 90%;
+        opacity: 1;
+        background-color: var(--light-yellow);
+        transition: 0.5s ease;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .hideFilterCont {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
     }
 }
