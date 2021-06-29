@@ -32,7 +32,8 @@ Theme - Plant and Ecommerce
 **Heroku**
 [Backend Source Code](https://github.com/vaishnavme/gardnup-backend)
 
-
+![GardnUp](https://github.com/vaishnavme/gardnup-frontend/blob/dev-2.0/template/mobile.png)
+![Desktop](https://github.com/vaishnavme/gardnup-frontend/blob/dev-2.0/template/desktop.png)
 
 # Getting Started with Create React App
 
