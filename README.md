@@ -24,8 +24,8 @@ Theme - Plant and Ecommerce
 - Mongoose
 - JWT (Json Web Tokens)
 
-> **Dummy Login Creds**
-> 
+> ### Dummy Login Creds
+>
 > **Email**: `johnsnow@dev.com`
 > **Password**: `Password@123`
 
