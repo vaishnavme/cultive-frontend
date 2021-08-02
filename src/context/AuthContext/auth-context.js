@@ -15,7 +15,6 @@ export const AuthProvider = ({children}) => {
     )
 
     if (token) {
-        console.log("token set");
         axios.defaults.headers.common["Authorization"] = `${token}`;
     }
 
@@ -36,7 +35,6 @@ export const AuthProvider = ({children}) => {
             return { user, success };
         } catch (err) {
             errorNotification("Error Occured!")
-            console.log(err);
         }
     }
 
@@ -48,7 +46,6 @@ export const AuthProvider = ({children}) => {
                 password: password
             })
             if(success) {
-                console.log("token");
                 setUser(user);
                 setToken(token);
                 axios.defaults.headers.common["Authorization"] = `${token}`

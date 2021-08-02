@@ -25,6 +25,20 @@ export default function Login() {
         }
     }
 
+    const loginAsGuest = async (e) => {
+        e.preventDefault()
+        const { success } = await logInUser(
+            "johnsnow@dev.com",
+            "Password@123"
+        )
+        if(success) {
+            successNotification("Login Successfull!!")
+            navigate(state?.from ? state.from : "/", { replace: true });
+        } else {
+            errorNotification("Error Ocuured")
+        }
+    }
+
     return (
         <div className={`${styles.main}`}>
             <div className={`${styles.card} p-2`}>
@@ -33,14 +47,14 @@ export default function Login() {
                     <h4>Welcome Back</h4>
                 </div>
                 <div className={`${styles.body}`}>
-                    <form onSubmit={(e) =>loginHandler(e)}>
+                    <form>
                         <div className={`styled-input`}>
                             <input
                                 onChange={(e) => setUserEmail(() => e.target.value)}
                                 value={userEmail}
                                 type="email" 
                                 placeholder="Enter your email" 
-                                required/>
+                                />
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
@@ -49,13 +63,18 @@ export default function Login() {
                                 value={userPassword}
                                 type="password" 
                                 placeholder="Enter your password" 
-                                required/>
+                                />
                             <span></span>
                         </div>
                         <button
-                            type="submit"
+                            onClick={() => loginHandler()}
                             className={`btn btn-secondary ${styles.formBtn}`}>
                                 Log in
+                        </button>
+                        <button
+                            onClick={(e) => loginAsGuest(e)}
+                            className={`btn btn-secondary ${styles.formBtn}`}>
+                                Login As Guest
                         </button>
                     </form>
                     <p>Don't have account? <Link className="f-primary" to="/signup">Sign Up</Link> here</p>

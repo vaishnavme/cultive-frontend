@@ -73,7 +73,6 @@ export const DataProvider = ({children}) => {
 
     useEffect(() => {
         token && getUserData();
-        console.log("User data loading...")
         // eslint-disable-next-line
     },[user, token]);
 
