@@ -32,7 +32,7 @@ export const Navbar = () => {
                 <div className={`${styles.navContent} `}>
                     <Link to="/" className={`${styles.navPerfil}`}>
                         <div className={`${styles.navBrand}`}>
-                            GradnUp
+                            GardnUp
                         </div>
                     </Link>
     

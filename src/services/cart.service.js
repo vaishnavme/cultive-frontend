@@ -21,7 +21,6 @@ export const addCartItems = async({
 export const updateProductQuantity = async({
     productId, userID, action, quantity, dispatch
 }) => {
-    console.log("action ", action);
     const {data:{success}} = await axios.post(`${BASE_URL}/cart/${userID}/${productId}`, {
         quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
     })
