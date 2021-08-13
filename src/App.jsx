@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account } from "./pages";
+import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account, RouteError } from "./pages";
 import { PrivateRoute, Navbar, Footer } from "./components";
 import { ToastContainer, Slide } from "react-toastify";
 
@@ -13,6 +13,7 @@ function App() {
           <Route path="products/:productID" element={<ProductDetails />}/>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="*" element={<RouteError />} />
           <PrivateRoute path="/cart" element={<Cart />}/>
           <PrivateRoute path="/wishlist" element={<Wishlist />}/>
           <PrivateRoute path="/account" element={<Account />}/>
