@@ -49,17 +49,17 @@ export const DataProvider = ({children}) => {
     const getUserData = async () => {
         try {
             //get user cart items
-            const  { data:{cart} } = await axios.get(`${BASE_URL}/cart/${user._id}`);
+            const  { data:{cart} } = await axios.get(`${BASE_URL}/cart`);
             const userCart = cart.cartItems;
+            // merging quantity and product in single obj
             const userCartItems = userCart.map((item) => {
                 return { ...item.product, quantity: item.quantity };
             });
             dispatch({type: "SET_CART", payload: userCartItems})
 
             //get user wishlist
-            const  { data:{wishlist} } = await axios.get(`${BASE_URL}/wishlist/${user._id}`); 
-            const userWishlist = wishlist.wishlist;
-            dispatch({type: "SET_WISHLIST", payload: userWishlist})
+            const  response = await axios.get(`${BASE_URL}/wishlist`); 
+            dispatch({type: "SET_WISHLIST", payload: response.data.wishlist})
 
         } catch(err) {
             console.log()
