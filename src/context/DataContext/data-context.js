@@ -2,20 +2,9 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import axios from "axios";
 import {BASE_URL}  from "../../api";
 import { useAuth, useLoader } from "..";
-import { dataReducer } from "./data-reducer";
+import { initialState, dataReducer } from "./data-reducer";
 
 const DataContext = createContext();
-
-const initialState = {
-    productData: [],
-    cartItems: [],
-    wishListItems: [],
-    showInventoryAll: [],
-    categories: [],
-    sizeSelect: [],
-    rating: null,
-    sortBy: null
-}
 
 export const DataProvider = ({children}) => {
     const { user, token } = useAuth();

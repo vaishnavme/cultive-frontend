@@ -5,12 +5,18 @@ import styles from "./Navbar.module.css";
 
 export const Navbar = () => {
     const { user, logOutUser } = useAuth();
-    const { cartItems, wishListItems } = useData();
+    const { cartItems, wishListItems, dispatch } = useData();
     const [isVisible, setVisible] = useState(false);
 
     const setNavVisible = () => {
         setVisible((prevState) => !prevState);
     }
+
+    const logout = () => {
+        logOutUser()
+        dispatch({type: "LOGOUT_USER_STATES"})
+    }
+
     const activeStyle = {
             color: "#65c728",
         }
@@ -80,7 +86,7 @@ export const Navbar = () => {
                                     </li>
                                     <li className={`${styles.dropdownItem} ${styles.borderTop}`}>
                                        { user ? (
-                                            <div onClick={() => logOutUser()} className={`${styles.navLink}`}><i className='bx bx-log-out'></i> Log Out </div>
+                                            <div onClick={() => logout()} className={`${styles.navLink}`}><i className='bx bx-log-out'></i> Log Out </div>
                                         ) :
                                         <NavLink to="/signup" className={`${styles.navLink}`}><i className='bx bx-log-in' ></i> Sign Up</NavLink>}
                                     </li>

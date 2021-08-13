@@ -1,3 +1,14 @@
+export const initialState = {
+    productData: [],
+    cartItems: [],
+    wishListItems: [],
+    showInventoryAll: [],
+    categories: [],
+    sizeSelect: [],
+    rating: null,
+    sortBy: null
+}
+
 export const dataReducer = (state, {type, payload}) => {
     switch(type) {
         case "SET_DATA":
@@ -89,6 +100,18 @@ export const dataReducer = (state, {type, payload}) => {
                 rating: null,
                 sortBy: null
             };
+        
+        case "LOGOUT_USER_STATES": 
+            return { 
+                productData: state.productData,
+                cartItems: [],
+                wishListItems: [],
+                showInventoryAll: [],
+                categories: [],
+                sizeSelect: [],
+                rating: null,
+                sortBy: null
+            }
 
         default: 
             return state
