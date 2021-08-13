@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
     )
 
     if (token) {
-        axios.defaults.headers.common["Authorization"] = `${token}`;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     }
 
     const logInUser = async (email, password) => {
@@ -28,7 +28,7 @@ export const AuthProvider = ({children}) => {
             if(success) {
                 setUser(user);
                 setToken(token);
-                axios.defaults.headers.common["Authorization"] = `${token}`
+                axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
                 localStorage.setItem("authUser", JSON.stringify(user));
                 localStorage.setItem("authToken", JSON.stringify(token));
             }
