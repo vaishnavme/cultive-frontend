@@ -3,42 +3,45 @@ import { BASE_URL } from "../api";
 import { successNotification, successRemoveNotification, errorNotification } from "../components";
 
 export const addCartItems = async({
-    product, userID, dispatch
+    product, dispatch
 }) => {
     try {
-        const {data: {success}} = await axios.post(`${BASE_URL}/cart/${userID}`, {
+        const response = await axios.post(`${BASE_URL}/cart`, {
             productId: product._id
         }) 
-        if(success) {
+        if(response.data.newResponse) {
             successNotification("Added to Cart!");
             dispatch({type:"ADD_TO_CART", payload: product})
-        }
+        } 
     } catch(err) {
+        console.log(err)
         errorNotification("Error Occured")
     }
 }
 
 export const updateProductQuantity = async({
-    productId, userID, action, quantity, dispatch
+    productId, action, quantity, dispatch
 }) => {
-    const {data:{success}} = await axios.post(`${BASE_URL}/cart/${userID}/${productId}`, {
-        quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
-    })
-    if(success) {
-        dispatch({type: action, payload: productId})
-    } else {
-        dispatch({type: action, payload: productId})
+    try {
+        const response = await axios.post(`${BASE_URL}/cart/${productId}`, {
+            quantity: action === "INC_QNT" ? quantity + 1 : quantity - 1
+        })
+        dispatch({type: action, payload: response.data.productId})
+    } catch(err) {
+        console.log(err)
     }
 }
 
 export const removeFromCart = async({
-    productId, userID, dispatch
+    productId, dispatch
 }) => {
-    const {data: {success}} = await axios.delete(`${BASE_URL}/cart/${userID}/${productId}`)
-    if(success) {
+    try {
+        const response = await axios.delete(`${BASE_URL}/cart/${productId}`)
+
         successRemoveNotification("Removed from Cart")
-        dispatch({type: "REMOVE_FROM_CART", payload: productId})
-    } else {
+        dispatch({type: "REMOVE_FROM_CART", payload: response.data.productId})
+    } catch(err) {
+        console.log(err);
         errorNotification("Error Occured!")
     }
 }
