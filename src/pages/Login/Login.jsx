@@ -5,18 +5,22 @@ import { errorNotification, successNotification } from "../../components";
 import styles from "./Login.module.css";
 
 export default function Login() {
-    const [userEmail, setUserEmail] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+    const [loginCred, setloginCred] = useState({});
     const { logInUser } = useAuth();
     const navigate = useNavigate();
     const { state } = useLocation();
+
+    const inputChangeHandler = (e) => {
+        e.preventDefault();
+        setloginCred((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }))
+    }
     
     const loginHandler = async (e) => {
         e.preventDefault();
-        const { success } = await logInUser(
-            userEmail,
-            userPassword
-        )
+        const { success } = await logInUser(loginCred)
         if(success) {
             successNotification("Login Successfull!!")
             navigate(state?.from ? state.from : "/", { replace: true });
@@ -50,8 +54,7 @@ export default function Login() {
                     <form>
                         <div className={`styled-input`}>
                             <input
-                                onChange={(e) => setUserEmail(() => e.target.value)}
-                                value={userEmail}
+                                onChange={(e) => inputChangeHandler(e)}
                                 type="email" 
                                 placeholder="Enter your email" 
                                 />
@@ -59,8 +62,7 @@ export default function Login() {
                         </div>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={(e) =>setUserPassword(() => e.target.value)}
-                                value={userPassword}
+                                onChange={(e) => inputChangeHandler(e)}
                                 type="password" 
                                 placeholder="Enter your password" 
                                 />

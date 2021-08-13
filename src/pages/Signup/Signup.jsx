@@ -8,26 +8,22 @@ export default function SignUp() {
     const { signUpUser } = useAuth();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState("")
-    const [userInfo, setUserInfo] = useState({
-        name: "",
-        email: "",
-        password: ""
-    });
+    const [signupCred, setSignupCred] = useState({});
     
     const inputChangeHandler = (e) => {
         e.preventDefault();
-        setUserInfo((prevState) => ({
+        setSignupCred((prevState) => ({
             ...prevState,
             [e.target.name] : e.target.value
         }))
     }
 
     const validate = () => {
-        if(!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(userInfo.email)) {
+        if(!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(signupCred.email)) {
             setErrorMessage("Invalid Email address!")
             return false
         }
-        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(userInfo.password)) {
+        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(signupCred.password)) {
             setErrorMessage("Must be atleast 8 characters long and contain 1 uppercase, lowercase letter and number.")
             return false
         }
@@ -38,7 +34,7 @@ export default function SignUp() {
     const createAccount = async (e) => {
         e.preventDefault();
         if(validate()) {
-            const { success, message } = await signUpUser(userInfo);
+            const { success, message } = await signUpUser(signupCred);
             
             if(success) {
                 successNotification("Account Created!!");
@@ -60,8 +56,7 @@ export default function SignUp() {
                     <form>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={inputChangeHandler}
-                                value={userInfo.name}
+                                onChange={(e) => inputChangeHandler(e)}
                                 name="name"
                                 type="text" 
                                 placeholder="Your Name" 
@@ -70,8 +65,7 @@ export default function SignUp() {
                         </div>
                         <div className={`styled-input`}>
                             <input
-                                onChange={inputChangeHandler}
-                                value={userInfo.email}
+                                onChange={(e) => inputChangeHandler(e)}
                                 name="email"
                                 type="email" 
                                 placeholder="Enter your email" 
@@ -80,8 +74,7 @@ export default function SignUp() {
                         </div>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={inputChangeHandler}
-                                value={userInfo.password}
+                                onChange={(e) => inputChangeHandler(e)}
                                 name="password"
                                 type="password" 
                                 placeholder="Enter your password" 
