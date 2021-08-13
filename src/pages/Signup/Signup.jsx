@@ -7,6 +7,7 @@ import styles from "./Signup.module.css";
 export default function SignUp() {
     const { signUpUser } = useAuth();
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("")
     const [userInfo, setUserInfo] = useState({
         name: "",
         email: "",
@@ -21,17 +22,31 @@ export default function SignUp() {
         }))
     }
 
+    const validate = () => {
+        if(!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(userInfo.email)) {
+            setErrorMessage("Invalid Email address!")
+            return false
+        }
+        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(userInfo.password)) {
+            setErrorMessage("Must be atleast 8 characters long and contain 1 uppercase, lowercase letter and number.")
+            return false
+        }
+        setErrorMessage("")
+        return true
+    }
+
     const createAccount = async (e) => {
         e.preventDefault();
-        const { success, message } = await signUpUser(userInfo);
-        
-        if(success) {
-            successNotification("Account Created!!");
-            navigate("/products")
-        } else {
-            errorNotification(message);
+        if(validate()) {
+            const { success, message } = await signUpUser(userInfo);
+            
+            if(success) {
+                successNotification("Account Created!!");
+                navigate("/products")
+            } else {
+                errorNotification(message);
+            }
         }
-        console.log("userinfo: ", userInfo)
     }
 
     return (
@@ -79,6 +94,10 @@ export default function SignUp() {
                                 Sign Up
                         </button>
                     </form>
+                    {
+                        errorMessage &&
+                        <p className="f-danger">{errorMessage}</p>
+                    }
                     <p>Already have an account? <Link className={`f-primary`} to="/login">Log in</Link> here</p>
                 </div>
             </div>
