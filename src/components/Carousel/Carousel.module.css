@@ -29,7 +29,8 @@
     z-index: 8;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.carouselBtn:hover, .slideButton:hover {
+.carouselBtn:hover,
+.slideButton:hover {
     color: var(--white);
     background-color: var(--green);
 }
@@ -59,26 +60,28 @@
 .tagline {
     font-size: 2rem;
 }
-@media screen and (max-width:1200px) {
+@media screen and (max-width: 1200px) {
     .carouselBtn {
         font-size: 1.2rem;
         padding: 0.5rem;
     }
-    .carousel, .slideImage {
+    .carousel,
+    .slideImage {
         object-fit: cover;
         object-position: left;
         height: 500px;
     }
 }
-@media screen and (min-width: 768px)  {
-    .carousel, .slideImage {
+@media screen and (min-width: 768px) {
+    .carousel,
+    .slideImage {
         min-height: 500px;
     }
     .tagline {
         max-width: 320px;
     }
 }
-@media screen and (max-width: 768px)  {
+@media screen and (max-width: 768px) {
     .carouselBtn {
         display: none;
     }

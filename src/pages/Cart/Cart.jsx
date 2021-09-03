@@ -1,3 +1,9 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useData, useAuth } from '../../context';
+import { alreadyExist } from '../../components';
+import { BASE_URL } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import { useData, useAuth } from '../../context';
 import { alreadyExist } from '../../components';
@@ -54,6 +60,51 @@ export default function Cart() {
             dispatch
         });
     };
+
+    const loadScript = (src) => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    };
+
+    useEffect(() => {
+        loadScript('https://checkout.razorpay.com/v1/checkout.js');
+    });
+
+    async function displayRazorpay() {
+        const { data } = await axios.post(`${BASE_URL}/cart/payment`, {
+            cartTotal
+        });
+
+        const options = {
+            key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+            currency: data.currency,
+            amount: data.amount,
+            name: 'GardnUp',
+            description: 'Refresh Your Home Inside and Out',
+            order_id: data.id,
+            handler: function (response) {
+                alert('PAYMENT ID ::' + response.razorpay_payment_id);
+                alert('ORDER ID :: ' + response.razorpay_order_id);
+            },
+            prefill: {
+                name: user.name,
+                email: user.email,
+                contact: '9999999999'
+            }
+        };
+
+        const paymentObject = new window.Razorpay(options);
+        paymentObject.open();
+    }
 
     return (
         <section className={`${styles.cartSection}`}>
@@ -174,6 +225,27 @@ export default function Cart() {
                         </div>
                         <div className={`${styles.checkout}`}>
                             <div className={`${styles.cardCheck}`}>
+                                <div className={`${styles.billing}`}>
+                                    <div className={`${styles.billingLabel}`}>
+                                        <ul>
+                                            <li>Subtotal</li>
+                                            <li>Shipping</li>
+                                            <li>Total (Tax incl.)</li>
+                                        </ul>
+                                    </div>
+                                    <div className={`${styles.billingTotal}`}>
+                                        <ul>
+                                            <li>{cartTotal}</li>
+                                            <li>Free</li>
+                                            <li>{cartTotal}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <button
+                                    onClick={displayRazorpay}
+                                    className={`${styles.btnBlock}`}
+                                >
+
                                 <label className={`${styles.lableName}`}>
                                     Payment Type
                                 </label>

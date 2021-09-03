@@ -28,8 +28,7 @@
     grid-gap: 0 4px;
     gap: 0 4px;
     display: grid;
-    grid-template-areas:
-        "title price";
+    grid-template-areas: 'title price';
     grid-template-columns: 1fr -webkit-max-content;
     grid-template-columns: 1fr max-content;
 }
