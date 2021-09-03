@@ -238,60 +238,7 @@ export default function Cart() {
                                         </ul>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={displayRazorpay}
-                                    className={`${styles.btnBlock}`}
-                                >
-
-                                <label className={`${styles.lableName}`}>
-                                    Payment Type
-                                </label>
-                                <div className={`${styles.select}`}>
-                                    <button className={`${styles.btnSelect}`}>
-                                        <i className="bx bxl-visa"></i>
-                                    </button>
-                                    <button className={`${styles.btnSelect}`}>
-                                        <i className="bx bxl-paypal"></i>
-                                    </button>
-                                </div>
-
-                                <div className={`${styles.formGroup} mt-2`}>
-                                    <label className={`${styles.lableName}`}>
-                                        Name on Card
-                                    </label>
-                                    <input
-                                        type="text"
-                                        className={`${styles.inputField} ${styles.inputFieldBlock}`}
-                                        placeholder="Your Name"
-                                    />
-
-                                    <div className={`${styles.cardDetails}`}>
-                                        <div>
-                                            <label
-                                                className={`${styles.lableName}`}
-                                            >
-                                                Expiration Date
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className={`${styles.inputField} ${styles.inputField}`}
-                                                placeholder="MM/YY"
-                                            />
-                                        </div>
-                                        <div>
-                                            <label
-                                                className={`${styles.lableName}`}
-                                            >
-                                                CVV
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className={`${styles.inputField} ${styles.inputField}`}
-                                                placeholder="eg. 123"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div className={`${styles.billing}`}>
                                     <div className={`${styles.billingLabel}`}>
                                         <ul>
@@ -308,7 +255,7 @@ export default function Cart() {
                                         </ul>
                                     </div>
                                 </div>
-                                <button className={`${styles.btnBlock}`}>
+                                <button  onClick={displayRazorpay} className={`${styles.btnBlock}`}>
                                     <div>{cartTotal}</div>
                                     <div className={`d-flex flex-align-center`}>
                                         Checkout{' '}
