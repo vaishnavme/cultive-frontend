@@ -1,25 +1,34 @@
 import { Routes, Route } from 'react-router-dom';
-import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account } from "./pages";
-import { useToast } from "./context";
-import { Navbar, Toast } from "./components";
-import { PrivateRoute } from "./api";
+import { Home, Products, ProductDetails, Cart, Wishlist, Login, SignUp, Account, RouteError } from "./pages";
+import { PrivateRoute, Navbar, Footer } from "./components";
+import { ToastContainer, Slide } from "react-toastify";
 
 function App() {
-  const { toastBox } = useToast();
   return (
     <div className="App">
       <Navbar/>
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="products" element={<Products />} />
-          <Route path="products/:id" element={<ProductDetails />}/>
-          <Route path="cart" element={<Cart />} />
-          <Route path="wishlist" element={<Wishlist />} />
+          <Route path="products/:productID" element={<ProductDetails />}/>
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <PrivateRoute path="account" element={<Account/>}/>
+          <Route path="*" element={<RouteError />} />
+          <PrivateRoute path="/cart" element={<Cart />}/>
+          <PrivateRoute path="/wishlist" element={<Wishlist />}/>
+          <PrivateRoute path="/account" element={<Account />}/>
       </Routes>
-      {toastBox["isVisible"] === true && <Toast/>}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        transition={Slide}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+      />
+      <Footer/>
     </div>
   );
 }

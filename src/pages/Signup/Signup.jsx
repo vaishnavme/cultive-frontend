@@ -1,15 +1,48 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context";
+import { errorNotification, successNotification } from "../../components";
 import styles from "./Signup.module.css";
 
 export default function SignUp() {
-    const [username, setUsername] = useState("");
-    const [userEmail, setUserEmail] = useState("");
-    const [userPassword, setUserPassword] = useState("");
+    const { signUpUser } = useAuth();
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState("")
+    const [signupCred, setSignupCred] = useState({});
     
-    const credHandler = () => {
-        setUserEmail("");
-        setUserPassword("");
+    const inputChangeHandler = (e) => {
+        e.preventDefault();
+        setSignupCred((prevState) => ({
+            ...prevState,
+            [e.target.name] : e.target.value
+        }))
+    }
+
+    const validate = () => {
+        if(!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(signupCred.email)) {
+            setErrorMessage("Invalid Email address!")
+            return false
+        }
+        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(signupCred.password)) {
+            setErrorMessage("Must be atleast 8 characters long and contain 1 uppercase, lowercase letter and number.")
+            return false
+        }
+        setErrorMessage("")
+        return true
+    }
+
+    const createAccount = async (e) => {
+        e.preventDefault();
+        if(validate()) {
+            const { success, message } = await signUpUser(signupCred);
+            
+            if(success) {
+                successNotification("Account Created!!");
+                navigate("/products")
+            } else {
+                errorNotification(message);
+            }
+        }
     }
 
     return (
@@ -23,17 +56,17 @@ export default function SignUp() {
                     <form>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={(e) =>setUsername(e.target.value)}
-                                value={username}
+                                onChange={(e) => inputChangeHandler(e)}
+                                name="name"
                                 type="text" 
-                                placeholder="username" 
+                                placeholder="Your Name" 
                                 required/>
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
                             <input
-                                onChange={(e) => setUserEmail(e.target.value)}
-                                value={userEmail}
+                                onChange={(e) => inputChangeHandler(e)}
+                                name="email"
                                 type="email" 
                                 placeholder="Enter your email" 
                                 required/>
@@ -41,21 +74,24 @@ export default function SignUp() {
                         </div>
                         <div className={`styled-input`}>
                             <input 
-                                onChange={(e) =>setUserPassword(e.target.value)}
-                                value={userPassword}
+                                onChange={(e) => inputChangeHandler(e)}
+                                name="password"
                                 type="password" 
                                 placeholder="Enter your password" 
                                 required/>
                             <span></span>
                         </div>
                         <button
-                            onClick={credHandler}
+                            onClick={(e) => createAccount(e)}
                             className={`btn btn-secondary ${styles.lognBtn}`}>
                                 Sign Up
                         </button>
                     </form>
+                    {
+                        errorMessage &&
+                        <p className="f-danger">{errorMessage}</p>
+                    }
                     <p>Already have an account? <Link className={`f-primary`} to="/login">Log in</Link> here</p>
-                    <small>Sign up is still under construstion</small>
                 </div>
             </div>
         </div>

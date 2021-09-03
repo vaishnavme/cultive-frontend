@@ -1,0 +1,79 @@
+.footerSection {
+    border-top: 1px solid var(--border);
+    margin: 2rem auto 0;
+    padding: 2rem 0 0;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.socialLink {
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    transition: 350ms ease-in-out;
+}
+.socialLink:hover {
+    color: var(--success);
+}
+.sociallist > li {
+    display: inline-block;
+}
+.sociallist > li .socialLink {
+    margin: 1rem 1rem 1rem 0;
+}
+.formGroup {
+    display: flex;
+    align-items: center;
+    flex-shrink: 1;
+}
+.inputField {
+    width: 15rem;
+    padding: 0.5rem;
+    font-family: inherit;
+    border-top-left-radius: 0.2rem;
+    border-bottom-left-radius: 0.2rem;
+    border: 1px solid var(--border);
+}
+.inputField::placeholder {
+    letter-spacing: 1px;
+}
+.btnSub {
+    letter-spacing: 1px;
+    padding: 0.4rem;
+    border-top-right-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+    color: var(--green);
+    background-color: var(--off-white);
+    transition: ease-in-out 400ms;
+}
+.btnSub:hover {
+    color: var(--white);
+    background-color: var(--green);
+}
+
+.footerBanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: var(--light-yellow);
+}
+
+@media screen and (max-width: 768px) {
+    .footer{
+        align-items: flex-start;
+        flex-direction: column;
+        margin: 1rem;
+    }
+    .siteMenu {
+        margin: 1rem 0;
+    }
+    .siteLinks > li {
+        display: inline-block;
+        margin: 1rem 1rem 1rem 0;
+    }
+}

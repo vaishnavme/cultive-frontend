@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
 import { useData } from "../../context";
-import { ProductCard, FilterBox, onlyUnique, Loader } from "../../components";
-import * as AIicons from "react-icons/ai";
+import { ProductCard, FilterBox, onlyUniqueValues, Loader } from "../../components";
 import styles from "./Products.module.css";
 
 export default function Products() {
-    const [showFilter, setShowFilter] = useState(false);
-    const { productData, showInventoryAll, sortBy, categories, dispatch, isLoading } = useData();
-    
-    const categoryList = productData.map((property) => property.category).filter(onlyUnique);
+    const { productData, showInventoryAll, sortBy, rating, categories, sizeSelect,dispatch, isLoading } = useData();
 
+    const categoryList = productData.map((property) => property.category).filter(onlyUniqueValues);
+    const sizeList = productData.map((property) => property.size).filter(onlyUniqueValues);
+   
     const getSortedData = (productList, sortBy) => {
         if (sortBy && sortBy === "PRICE_HIGH_TO_LOW") {
             return productList.sort((a, b) => b["price"] - a["price"]);
@@ -20,55 +18,51 @@ export default function Products() {
         }
         return productList;
     }
+
+    const getProductByRatings = (productList, rating) => {
+        if(rating !== null) {
+            return productList.filter((product) => product.rating >= rating)
+        } else {
+            return productList
+        }
+    }
     
     const getFilteredData = (
-        productList,{ showInventoryAll, categories })  => {
+        productList,{ showInventoryAll, categories, sizeSelect })  => {
         return productList
             .filter(product => categories.length > 0 ? categories.includes(product.category) : product)
+            .filter(product => sizeSelect.length > 0 ? sizeSelect.includes(product.size): product)
             .filter(({ inStock }) => (showInventoryAll ? true : inStock))
       }
-
-    const sortedData = getSortedData(productData, sortBy);
-    const filteredData = getFilteredData(sortedData, {showInventoryAll, categories});
+    const filterByRating = getProductByRatings(productData, rating)
+    const sortedData = getSortedData(filterByRating, sortBy);
+    const filteredData = getFilteredData(sortedData, {showInventoryAll, categories, sizeSelect});
     
-    const filterHandler = () => {
-        setShowFilter(() => !showFilter);
-    }
-
-    useEffect(() => {
-        if(window.innerWidth > 768) {
-            setShowFilter(true)
-        }
-    },[])
     return (
-        <>
-        <button 
-            onClick={filterHandler}
-            className={`btn iconBtn ${styles.filterBtn}`}>
-            <AIicons.AiOutlineFilter/>Filter
-        </button>
-           <div>
-           { showFilter &&
-               <FilterBox 
-               showInventoryAll={showInventoryAll}
-               categoryList={categoryList}
-               categories={categories}
-               sortBy={sortBy}
-               dispatch={dispatch}
-           />
-           }
-           </div>
-           {isLoading && <Loader/>}
-            <main className={`${styles.main} p-2`}>
+        <section>
+            {isLoading && <Loader/>}
+            <div className={`${styles.header}`}>
+                <div className={`${styles.headerText} h1`}>Products</div>
+            </div>
+            <FilterBox 
+                showInventoryAll={showInventoryAll}
+                categoryList={categoryList}
+                categories={categories}
+                sizeSelect={sizeSelect}
+                sizeList={sizeList}
+                sortBy={sortBy}
+                rating={rating}
+                dispatch={dispatch}
+            />
+            <div className={`${styles.container}`}>
                 <div className={`${styles.productGrid} mt-4`}>
-                    {
-                        filteredData &&
+                    { filteredData &&
                         filteredData.map((product) => (
                             <ProductCard key={product._id} product={product}/>
                         ))
                     }
                 </div>
-            </main>
-        </>
+            </div>
+        </section>
     )
 }

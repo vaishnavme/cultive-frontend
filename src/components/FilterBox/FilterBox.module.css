@@ -1,21 +1,122 @@
-.sidebar {
-    position: fixed;
-    width: 16rem;
-    height: 100%;
-    padding: 1rem;
-    border-right: 3px solid var(--border);
+.wrapper {
+    max-width: 82%;
+    margin: auto;
 }
-.card {
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
+.btnIcon {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 0.2rem 0.5rem;
+    border: none !important;
+    background: none;
+    display: flex;
+    align-items: center;
+    border-radius: 0.2rem;
+    width: max-content;
 }
-.cardSection {
-    border-bottom: 1px solid var(--border);
+.btnIcon:hover, .btn:focus, .btn:active {
+    background-color: var(--success-light);
+    border: 1px solid var(--success);
+} 
+.action {
+    display: flex;
+    margin: 1.5rem 1.5rem 1.5rem 0;
+    padding: 1rem 1rem 1rem 0;
 }
-
-
+.actionSelect {
+    margin-left: 5rem;
+}
+.selectOption {
+    padding: 0.5rem;
+    width: 12rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.filterContainer {
+    border-radius: 0.2rem;
+    place-items: center;
+    overflow: hidden;
+    max-height: 18rem;
+    opacity: 1;
+    background-color: var(--light-yellow);
+    transition: 0.5s ease;
+}
+.hideFilterCont {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+}
+.filterBox {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    padding: 0.5rem 1.5rem;
+}
+.filterName {
+    font-size: 1rem;
+    letter-spacing: 0.9px;
+    font-weight: 600;
+}
+.labelName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.25rem auto 0.25rem 0;
+    display: flex;
+    align-items: center;
+}
 @media screen and (max-width: 768px) {
-    .sidebar {
-        all: unset;
+    .wrapper {
+        max-width: 100%;
+        padding: 1rem;
+    }
+    .filterBox {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .action {
+        margin: auto;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    .actionSelect {
+        margin: 1rem;
+    }
+    .box1 {
+        grid-area: box1;
+    }
+    .box2 {
+        grid-area: box2;
+    }
+    .box3 {
+        grid-area: box3;
+    }
+    .filterBox {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        column-gap: 1rem;
+        row-gap: 1rem;
+        grid-template-areas: 
+        "box1 box2"
+        "box3 box3";
+    }
+    .filterContainer {
+        position: absolute;
+        border-radius: 0.2rem;
+        place-items: center;
+        overflow: hidden;
+        z-index: 8;
+        max-height: 100%;
+        width: 90%;
+        opacity: 1;
+        background-color: var(--light-yellow);
+        transition: 0.5s ease;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .hideFilterCont {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
     }
 }

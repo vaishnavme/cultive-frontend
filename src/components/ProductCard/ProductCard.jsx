@@ -1,30 +1,41 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useData, useAuth } from "../../context";
-import * as AIicons from "react-icons/ai";
-import { checkIn, Modal } from "../index";
+import { toggleWishlistItems } from "../../services";
+import { alreadyExist, Modal } from "..";
 import styles from "./ProductCard.module.css";
 
 export const ProductCard = ({product}) => {
-    const { wishListItems, addToWishlist, removeFromWishlist } = useData();
+    const { wishListItems } = useData();
     const { user } = useAuth();
+    const { dispatch } = useData();
     const [showModal, setShowModal] = useState(false);
 
-    const wishBtnHandler = (productID) => {
+    const addToWishlist = (product) => {
         user ? (
-            checkIn(wishListItems, productID) ?
-            removeFromWishlist({product: productID})
-            : addToWishlist({product: productID})
+            alreadyExist(wishListItems, product._id) ?
+            toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "REMOVE",
+                dispatch,
+            })
+            : toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "ADD",
+                dispatch,
+            })
         ) : setShowModal(true)
     }
 
-    const modalCloseBtn = () => {
+    const setModelVisibility = () => {
         setShowModal(() => !showModal);
     }
 
     return (
         <>
-        {showModal && <Modal modalCloseBtn={modalCloseBtn}/>}
+        {showModal && <Modal setModelVisibility={setModelVisibility}/>}
         <div className={`${styles.productContainer}`}>
             <Link to={`/products/${product._id}`}>
                 <div className={`${styles.productCard}`}>
@@ -38,8 +49,13 @@ export const ProductCard = ({product}) => {
             <div>
                 <button
                     className={`btn iconBtn ${styles.wishlistBtn}`} 
-                    onClick={() => wishBtnHandler(product._id)}>
-                    {checkIn(wishListItems, product._id) ? <AIicons.AiFillHeart className={`${styles.fillWishlist}`}/> : <AIicons.AiOutlineHeart/>}                </button>
+                    onClick={() => addToWishlist(product)}>
+                    { 
+                        alreadyExist(wishListItems, product._id) ? 
+                            <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> 
+                            : <i className='bx bx-heart' ></i>
+                    }                
+                </button>
             </div>
         </div>
         </>

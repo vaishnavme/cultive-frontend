@@ -1,3 +1,14 @@
+export const initialState = {
+    productData: [],
+    cartItems: [],
+    wishListItems: [],
+    showInventoryAll: [],
+    categories: [],
+    sizeSelect: [],
+    rating: null,
+    sortBy: null
+}
+
 export const dataReducer = (state, {type, payload}) => {
     switch(type) {
         case "SET_DATA":
@@ -11,7 +22,7 @@ export const dataReducer = (state, {type, payload}) => {
             return {...state, wishListItems: payload || []}
         }
         case "ADD_TO_CART":
-            return {...state, cartItems: state.cartItems.concat(payload)}
+            return {...state, cartItems: [...state.cartItems, {...payload, quantity: 1}]}
 
             
         case "REMOVE_FROM_CART":
@@ -53,10 +64,10 @@ export const dataReducer = (state, {type, payload}) => {
             }
             
         case "SORT":
-            return {
-                ...state,
-                sortBy: payload
-            }
+            return {...state, sortBy: payload }
+
+        case "FILTER_BY_RATING": 
+            return {...state, rating: payload }
 
         case "TOGGLE_INVENTORY":
             return {
@@ -71,6 +82,14 @@ export const dataReducer = (state, {type, payload}) => {
                 ? state.categories.filter((value) => value !== payload)
                 : state.categories.concat(payload)
             }
+        
+        case "TOGGLE_SIZE": 
+            return {
+                ...state,
+                sizeSelect: state.sizeSelect.some((value) => value === payload)
+                ? state.sizeSelect.filter((value) => value !== payload)
+                : state.sizeSelect.concat(payload)
+            }
 
         case "CLEAR_ALL_FILTERS":
             return {
@@ -78,8 +97,21 @@ export const dataReducer = (state, {type, payload}) => {
                 inStock: false,
                 showInventoryAll: true,
                 categories: [],
+                rating: null,
                 sortBy: null
             };
+        
+        case "LOGOUT_USER_STATES": 
+            return { 
+                productData: state.productData,
+                cartItems: [],
+                wishListItems: [],
+                showInventoryAll: [],
+                categories: [],
+                sizeSelect: [],
+                rating: null,
+                sortBy: null
+            }
 
         default: 
             return state

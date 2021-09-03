@@ -6,3 +6,4 @@ export { default as ProductDetails } from "./ProductDetails/ProductDetails";
 export { default as Login } from "./Login/Login";
 export { default as SignUp } from "./Signup/Signup";
 export { default as Account } from "./Account/Account";
+export { RouteError } from "./404/RouteError";

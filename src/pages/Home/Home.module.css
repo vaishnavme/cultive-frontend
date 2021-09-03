@@ -1,29 +1,41 @@
-.wallpaper {
-    width: 100%;
-    background-image: url("../../assets/images/wallpaper2-min.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 430px;
-}
-.header {
-    margin: auto auto 2rem;
-    padding: 5rem 1rem;
-    text-align: center;
-    background-color: var(--light-yellow);
-}
-.mainGrid {
-    margin: 2rem auto;
-    padding: 0.5rem;
+.bannerSection {
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 1rem auto;
+    padding: 0.5rem;
 }
-.image {
+.banner {
+    position: relative;
+    max-width: 700px;
+    cursor: pointer;
+    transition: ease 300ms;
+}
+
+.bannerImg {
     width: 100%;
-    max-width: 20rem;
+    max-width: 700px;
     height: auto;
-    border: 5px solid var(--light-yellow);
+    margin: 1rem auto;
     border-radius: 0.5rem;
+    transition: ease 300ms;
+}
+.bannerImg:hover {
+    transform: scale(1.02);
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
+}
+.bannerInfo {
+    position: absolute;
+    top: 40%;
+    left: 30%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+}
+@media screen and (max-width: 1200px) {
+    .bannerSection {
+        flex-direction: column;
+    }
+    .bannerImg {
+        border-radius: 0.5rem;
+    }
 }

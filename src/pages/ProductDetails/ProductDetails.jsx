@@ -1,24 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useData, useAuth } from "../../context";
+import { useData, useAuth, useLoader } from "../../context";
 import axios from "axios";
-import * as AIicons from "react-icons/ai";
-import { checkIn, Loader, Modal } from "../../components";
+import {BASE_URL}  from "../../api";
+import { toggleWishlistItems } from "../../services";
+import { ProductCard, alreadyExist, Loader, Modal } from "../../components";
+import { addCartItems } from "../../services";
 import styles from "./ProductDetails.module.css";
 
 export default function ProductDetails() {
     const [showModal, setShowModal] = useState(false);
     const [product, setProduct] = useState();
-    const { cartItems, wishListItems, addToCartHandler, addToWishlist, removeFromWishlist, isLoading, setLoading } = useData();
-    const  { user } = useAuth();
-    const { id } = useParams();
+    const { productData, cartItems, wishListItems } = useData();
+    const { isLoading, setLoading } = useLoader();
+    const { user } = useAuth();
+    const { dispatch } = useData();
+
+    const { productID } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
             try {
                 setLoading(true)
-                const {data: {product}} = await axios.get(`https://cultivateneog.herokuapp.com/products/${id}`)
+                const {data: {product}} = await axios.get(`${BASE_URL}/products/${productID}`)
                 setProduct(product);
                 setLoading(false)
             } catch (err) {
@@ -28,37 +33,54 @@ export default function ProductDetails() {
             }
         })();
         // eslint-disable-next-line 
-    },[id]);
+    },[productID]);
 
-    const wishBtnHandler = (productID) => {
+    const addToWishlist = (product) => {
         user ? (
-            checkIn(wishListItems, productID) ?
-            removeFromWishlist({product: productID})
-            : addToWishlist({product: productID})
+            alreadyExist(wishListItems, product._id) ?
+            toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "REMOVE",
+                dispatch,
+            })
+            : toggleWishlistItems({
+                product: product, 
+                userID: user._id,
+                action: "ADD",
+                dispatch,
+            })
         ) : setShowModal(true)
     }
 
-    const cartBtnHandler = (productID) => {
+    const addToCart = (product) => {
         user ? (
-            checkIn(cartItems, productID) ? navigate("/cart")
-            : addToCartHandler({product: productID})
+            alreadyExist(cartItems, product._id) ? navigate("/cart")
+            : addCartItems({
+                product: product, 
+                userID: user._id,
+                dispatch,
+            })
         ) : setShowModal(true)
     }
 
-    const modalCloseBtn = () => {
+    const setModelVisibility = () => {
         setShowModal(() => !showModal);
     }
+    
+    const similarProducts = product && productData.filter((item) => item.category === product.category).slice(1,5)
 
     return (
         <div className={`${styles.container}`}>
             {isLoading && <Loader/>}
-            {showModal && <Modal modalCloseBtn={modalCloseBtn}/>}
+            {showModal && <Modal setModelVisibility={setModelVisibility}/>}
             {
                 product && 
+                <>
                 <div className={`${styles.productSummary}`}>
                     <div className={`${styles.productImage}`}>
                         <img 
-                            className={`${styles.image}`}
+                            className={`${styles.image} ${product.inStock || styles.outOffStock}`}
                             src={product.image} 
                             alt={product.name}/>
                     </div>
@@ -90,15 +112,15 @@ export default function ProductDetails() {
 
                         <div className={`d-flex`}>
                             <button className={`btn ${styles.btnSecondary}`}
-                                onClick={() => wishBtnHandler(product._id)}>
-                            {checkIn(wishListItems, product._id) ? <AIicons.AiFillHeart className={`${styles.fillWishlist}`}/> : <AIicons.AiOutlineHeart/>}
+                                onClick={() => addToWishlist(product)}>
+                                {alreadyExist(wishListItems, product._id) ? <i className={`bx bxs-heart ${styles.fillWishlist}`} ></i> : <i className='bx bx-heart' ></i>}
                             </button>
                             <button 
                                 disabled={product.inStock ? false : true}
                                 className={`btn ${styles.btnPrimary}`}
-                                onClick={() => cartBtnHandler(product._id)}>
+                                onClick={() => addToCart(product)}>
                                 {product.inStock ? 
-                                    (checkIn(cartItems, product._id) ? "Go to Cart" : "Buy")
+                                    (alreadyExist(cartItems, product._id) ? "Go to Cart" : "Buy")
                                 : "Not Avaliable"
                             }
                                       
@@ -106,6 +128,17 @@ export default function ProductDetails() {
                         </div>
                     </div>
                 </div>
+                <div className={`${styles.containerNext}`}>
+                <div className={`h3`}>Similar Products</div>
+                <div className={`${styles.productGrid} mt-4`}>
+                    {
+                        similarProducts?.map((product) => (
+                            <ProductCard key={product._id} product={product}/>
+                        ))
+                    }
+                </div>
+            </div>
+            </>
             }
         </div>
     )

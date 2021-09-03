@@ -1,0 +1,85 @@
+.carousel {
+    position: relative;
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+}
+.slideImage {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+}
+.slideButton {
+    color: var(--green);
+    padding: 0.6rem 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+    letter-spacing: 1.1px;
+}
+.carouselBtn {
+    position: absolute;
+    top: 50%;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    z-index: 8;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.carouselBtn:hover, .slideButton:hover {
+    color: var(--white);
+    background-color: var(--green);
+}
+.right {
+    right: 1rem;
+}
+.left {
+    left: 1rem;
+}
+.slide {
+    opacity: 0;
+    transition: 1s ease-in-out;
+}
+.activeSlide {
+    opacity: 1;
+    transition-duration: 1s;
+    transform: scale(1.08);
+}
+.slideText {
+    position: absolute;
+    top: 30%;
+    right: 8rem;
+    z-index: 8;
+    padding: 1rem;
+    margin: 1rem;
+}
+.tagline {
+    font-size: 2rem;
+}
+@media screen and (max-width:1200px) {
+    .carouselBtn {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
+    .carousel, .slideImage {
+        object-fit: cover;
+        object-position: left;
+        height: 500px;
+    }
+}
+@media screen and (min-width: 768px)  {
+    .carousel, .slideImage {
+        min-height: 500px;
+    }
+    .tagline {
+        max-width: 320px;
+    }
+}
+@media screen and (max-width: 768px)  {
+    .carouselBtn {
+        display: none;
+    }
+}
