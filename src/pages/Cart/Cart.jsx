@@ -239,22 +239,6 @@ export default function Cart() {
                                     </div>
                                 </div>
                                 
-                                <div className={`${styles.billing}`}>
-                                    <div className={`${styles.billingLabel}`}>
-                                        <ul>
-                                            <li>Subtotal</li>
-                                            <li>Shipping</li>
-                                            <li>Total (Tax incl.)</li>
-                                        </ul>
-                                    </div>
-                                    <div className={`${styles.billingTotal}`}>
-                                        <ul>
-                                            <li>{cartTotal}</li>
-                                            <li>Free</li>
-                                            <li>{cartTotal}</li>
-                                        </ul>
-                                    </div>
-                                </div>
                                 <button  onClick={displayRazorpay} className={`${styles.btnBlock}`}>
                                     <div>{cartTotal}</div>
                                     <div className={`d-flex flex-align-center`}>
