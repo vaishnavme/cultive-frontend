@@ -1,8 +1,8 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
-import { useAuth } from "../../context";
-import { errorNotification, successNotification } from "../../components";
-import styles from "./Login.module.css";
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../../context';
+import { errorNotification, successNotification } from '../../components';
+import styles from './Login.module.css';
 
 export default function Login() {
     const [loginCred, setloginCred] = useState({});
@@ -14,34 +14,31 @@ export default function Login() {
         e.preventDefault();
         setloginCred((prevState) => ({
             ...prevState,
-            [e.target.name] : e.target.value
-        }))
-    }
-    
+            [e.target.name]: e.target.value
+        }));
+    };
+
     const loginHandler = async (e) => {
         e.preventDefault();
-        const { success } = await logInUser(loginCred)
-        if(success) {
-            successNotification("Login Successfull!!")
-            navigate(state?.from ? state.from : "/", { replace: true });
+        const { success } = await logInUser(loginCred);
+        if (success) {
+            successNotification('Login Successfull!!');
+            navigate(state?.from ? state.from : '/', { replace: true });
         } else {
-            errorNotification("Error Ocuured")
+            errorNotification('Error Ocuured');
         }
-    }
+    };
 
     const loginAsGuest = async (e) => {
-        e.preventDefault()
-        const { success } = await logInUser(
-            "johnsnow@dev.com",
-            "Password@123"
-        )
-        if(success) {
-            successNotification("Login Successfull!!")
-            navigate(state?.from ? state.from : "/", { replace: true });
+        e.preventDefault();
+        const { success } = await logInUser('johnsnow@dev.com', 'Password@123');
+        if (success) {
+            successNotification('Login Successfull!!');
+            navigate(state?.from ? state.from : '/', { replace: true });
         } else {
-            errorNotification("Error Ocuured")
+            errorNotification('Error Ocuured');
         }
-    }
+    };
 
     return (
         <div className={`${styles.main}`}>
@@ -55,33 +52,41 @@ export default function Login() {
                         <div className={`styled-input`}>
                             <input
                                 onChange={(e) => inputChangeHandler(e)}
-                                type="email" 
-                                placeholder="Enter your email" 
-                                />
+                                type="email"
+                                placeholder="Enter your email"
+                            />
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
-                            <input 
+                            <input
                                 onChange={(e) => inputChangeHandler(e)}
-                                type="password" 
-                                placeholder="Enter your password" 
-                                />
+                                type="password"
+                                placeholder="Enter your password"
+                            />
                             <span></span>
                         </div>
                         <button
                             onClick={() => loginHandler()}
-                            className={`btn btn-secondary ${styles.formBtn}`}>
-                                Log in
+                            className={`btn btn-secondary ${styles.formBtn}`}
+                        >
+                            Log in
                         </button>
                         <button
                             onClick={(e) => loginAsGuest(e)}
-                            className={`btn btn-secondary ${styles.formBtn}`}>
-                                Login As Guest
+                            className={`btn btn-secondary ${styles.formBtn}`}
+                        >
+                            Login As Guest
                         </button>
                     </form>
-                    <p>Don't have account? <Link className="f-primary" to="/signup">Sign Up</Link> here</p>
+                    <p>
+                        Don't have account?{' '}
+                        <Link className="f-primary" to="/signup">
+                            Sign Up
+                        </Link>{' '}
+                        here
+                    </p>
                 </div>
             </div>
         </div>
-    )
+    );
 }

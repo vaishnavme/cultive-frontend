@@ -24,8 +24,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
-    grid-template-areas: 
-    "cartItems cartItems checkout";
+    grid-template-areas: 'cartItems cartItems checkout';
 }
 .productList {
     margin: 1rem 0;
@@ -36,8 +35,7 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 0.5rem;
-    grid-template-areas: 
-    "info info quantity price action";
+    grid-template-areas: 'info info quantity price action';
 }
 .productInfo {
     grid-area: info;
@@ -53,7 +51,9 @@
 .ProductAction {
     grid-area: action;
 }
-.productQuantity, .productPrice, .productAction {
+.productQuantity,
+.productPrice,
+.productAction {
     display: flex;
     align-items: center;
 }
@@ -73,7 +73,8 @@
     padding: 1rem;
     min-height: 30rem;
     border-radius: 0.2rem;
-    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
+        rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 .lableName {
     font-size: 0.7rem;
@@ -100,8 +101,10 @@
 .btnSelect:focus {
     background-color: var(--success-light);
 }
-.btnSelect:active, .btnSelect:focus,
-.inputField:active, .inputField:focus {
+.btnSelect:active,
+.btnSelect:focus,
+.inputField:active,
+.inputField:focus {
     border: 1px solid var(--heighlight);
 }
 
@@ -134,8 +137,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
-    grid-template-areas: 
-    "label num";
+    grid-template-areas: 'label num';
     padding: 0.5rem 0;
     border-bottom: 1px solid var(--border);
 }
@@ -158,7 +160,9 @@
     background-color: var(--success-light);
     transition: ease-in-out 500ms;
 }
-.btnBlock:active, .btnBlock:focus, .btnBlock:hover {
+.btnBlock:active,
+.btnBlock:focus,
+.btnBlock:hover {
     color: var(--white);
     background-color: var(--success);
     border: 1px solid var(--heighlight);
@@ -172,9 +176,9 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
         grid-gap: 1rem;
-        grid-template-areas: 
-        "cartItems cartItems"
-        "checkout checkout"; 
+        grid-template-areas:
+            'cartItems cartItems'
+            'checkout checkout';
     }
 }
 
