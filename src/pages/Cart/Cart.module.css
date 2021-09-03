@@ -75,15 +75,7 @@
     box-shadow: rgba(17, 17, 26, 0.05) 0px 4px 16px,
         rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
-.lableName {
-    font-size: 0.7rem;
-    color: var(--gray);
-    font-weight: 600;
-}
-.select {
-    display: flex;
-    justify-content: space-between;
-}
+
 .btnSelect {
     display: flex;
     justify-content: center;
@@ -97,40 +89,17 @@
     cursor: pointer;
     background-color: var(--white);
 }
-.btnSelect:focus {
-    background-color: var(--success-light);
-}
 .btnSelect:active,
 .btnSelect:focus,
 .inputField:active,
 .inputField:focus {
     border: 1px solid var(--heighlight);
 }
-
 .formGroup {
     border-bottom: 1px solid var(--border);
 }
 .formGroup input {
     display: block;
-}
-.inputField {
-    padding: 0.6rem;
-    border-radius: 0.2rem;
-    border: 1px solid var(--border);
-    font-family: inherit;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-}
-.inputFieldBlock {
-    width: 100%;
-}
-.inputField::placeholder {
-    font-family: inherit;
-    letter-spacing: 1px;
-}
-.cardDetails {
-    display: flex;
-    padding: 1rem 0;
 }
 .billing {
     display: grid;
