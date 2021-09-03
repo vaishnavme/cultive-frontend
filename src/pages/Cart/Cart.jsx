@@ -4,9 +4,6 @@ import axios from 'axios';
 import { useData, useAuth } from '../../context';
 import { alreadyExist } from '../../components';
 import { BASE_URL } from '../../api';
-import { useNavigate } from 'react-router-dom';
-import { useData, useAuth } from '../../context';
-import { alreadyExist } from '../../components';
 import {
     updateProductQuantity,
     removeFromCart,
