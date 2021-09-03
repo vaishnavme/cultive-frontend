@@ -1,49 +1,57 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuth } from "../../context";
-import { errorNotification, successNotification } from "../../components";
-import styles from "./Signup.module.css";
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAuth } from '../../context';
+import { errorNotification, successNotification } from '../../components';
+import styles from './Signup.module.css';
 
 export default function SignUp() {
     const { signUpUser } = useAuth();
     const navigate = useNavigate();
-    const [errorMessage, setErrorMessage] = useState("")
+    const [errorMessage, setErrorMessage] = useState('');
     const [signupCred, setSignupCred] = useState({});
-    
+
     const inputChangeHandler = (e) => {
         e.preventDefault();
         setSignupCred((prevState) => ({
             ...prevState,
-            [e.target.name] : e.target.value
-        }))
-    }
+            [e.target.name]: e.target.value
+        }));
+    };
 
     const validate = () => {
-        if(!/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(signupCred.email)) {
-            setErrorMessage("Invalid Email address!")
-            return false
+        if (
+            !/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+$/i.test(signupCred.email)
+        ) {
+            setErrorMessage('Invalid Email address!');
+            return false;
         }
-        if(!/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(signupCred.password)) {
-            setErrorMessage("Must be atleast 8 characters long and contain 1 uppercase, lowercase letter and number.")
-            return false
+        if (
+            !/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/i.test(
+                signupCred.password
+            )
+        ) {
+            setErrorMessage(
+                'Must be atleast 8 characters long and contain 1 uppercase, lowercase letter and number.'
+            );
+            return false;
         }
-        setErrorMessage("")
-        return true
-    }
+        setErrorMessage('');
+        return true;
+    };
 
     const createAccount = async (e) => {
         e.preventDefault();
-        if(validate()) {
+        if (validate()) {
             const { success, message } = await signUpUser(signupCred);
-            
-            if(success) {
-                successNotification("Account Created!!");
-                navigate("/products")
+
+            if (success) {
+                successNotification('Account Created!!');
+                navigate('/products');
             } else {
                 errorNotification(message);
             }
         }
-    }
+    };
 
     return (
         <div className={`${styles.main}`}>
@@ -55,45 +63,52 @@ export default function SignUp() {
                 <div className={`${styles.body}`}>
                     <form>
                         <div className={`styled-input`}>
-                            <input 
+                            <input
                                 onChange={(e) => inputChangeHandler(e)}
                                 name="name"
-                                type="text" 
-                                placeholder="Your Name" 
-                                required/>
+                                type="text"
+                                placeholder="Your Name"
+                                required
+                            />
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
                             <input
                                 onChange={(e) => inputChangeHandler(e)}
                                 name="email"
-                                type="email" 
-                                placeholder="Enter your email" 
-                                required/>
+                                type="email"
+                                placeholder="Enter your email"
+                                required
+                            />
                             <span></span>
                         </div>
                         <div className={`styled-input`}>
-                            <input 
+                            <input
                                 onChange={(e) => inputChangeHandler(e)}
                                 name="password"
-                                type="password" 
-                                placeholder="Enter your password" 
-                                required/>
+                                type="password"
+                                placeholder="Enter your password"
+                                required
+                            />
                             <span></span>
                         </div>
                         <button
                             onClick={(e) => createAccount(e)}
-                            className={`btn btn-secondary ${styles.lognBtn}`}>
-                                Sign Up
+                            className={`btn btn-secondary ${styles.lognBtn}`}
+                        >
+                            Sign Up
                         </button>
                     </form>
-                    {
-                        errorMessage &&
-                        <p className="f-danger">{errorMessage}</p>
-                    }
-                    <p>Already have an account? <Link className={`f-primary`} to="/login">Log in</Link> here</p>
+                    {errorMessage && <p className="f-danger">{errorMessage}</p>}
+                    <p>
+                        Already have an account?{' '}
+                        <Link className={`f-primary`} to="/login">
+                            Log in
+                        </Link>{' '}
+                        here
+                    </p>
                 </div>
             </div>
         </div>
-    )
+    );
 }

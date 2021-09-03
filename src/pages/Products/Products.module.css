@@ -1,5 +1,5 @@
 .header {
-    background-image: url("https://cdn.shopify.com/s/files/1/0317/0687/3992/files/bg_about.jpg");
+    background-image: url('https://cdn.shopify.com/s/files/1/0317/0687/3992/files/bg_about.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -32,7 +32,7 @@
         grid-column-gap: 1rem;
         grid-row-gap: 1rem;
     }
-} 
+}
 @media screen and (min-width: 486px) and (max-width: 768px) {
     .container {
         margin: 0 auto;
