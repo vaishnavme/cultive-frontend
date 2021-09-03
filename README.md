@@ -1,5 +1,3 @@
-# GardnUp - ReactJs Ecommerce Site
-
 #### [Live](https://gardnup.netlify.app/)  [https://gardnup.netlify.app/](https://gardnup.netlify.app/)
 
 Theme - Plant and Ecommerce
