@@ -9,6 +9,7 @@ export default function SignUp() {
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [signupCred, setSignupCred] = useState({});
+    const [isLoading, setLoading] = useState(false);
 
     const inputChangeHandler = (e) => {
         e.preventDefault();
@@ -42,11 +43,13 @@ export default function SignUp() {
     const createAccount = async (e) => {
         e.preventDefault();
         if (validate()) {
+            setLoading(true);
             const { success, message } = await signUpUser(signupCred);
 
             if (success) {
                 successNotification('Account Created!!');
                 navigate('/products');
+                setLoading(false);
             } else {
                 errorNotification(message);
             }
@@ -96,7 +99,11 @@ export default function SignUp() {
                             onClick={(e) => createAccount(e)}
                             className={`btn btn-secondary ${styles.lognBtn}`}
                         >
-                            Sign Up
+                            {isLoading ? (
+                                <i className="bx bx-loader-alt bx-spin"></i>
+                            ) : (
+                                'Sign Up'
+                            )}
                         </button>
                     </form>
                     {errorMessage && <p className="f-danger">{errorMessage}</p>}
