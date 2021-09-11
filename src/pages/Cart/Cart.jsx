@@ -252,7 +252,7 @@ export default function Cart() {
                                 >
                                     <div>{cartTotal}</div>
                                     {isLoading ? (
-                                        <i class="bx bx-loader-alt bx-spin"></i>
+                                        <i className="bx bx-loader-alt bx-spin"></i>
                                     ) : (
                                         <div
                                             className={`d-flex flex-align-center`}

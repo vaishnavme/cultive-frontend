@@ -6,6 +6,7 @@ import styles from './Login.module.css';
 
 export default function Login() {
     const [loginCred, setloginCred] = useState({});
+    const [isLoading, setLoading] = useState(false);
     const { logInUser } = useAuth();
     const navigate = useNavigate();
     const { state } = useLocation();
@@ -20,10 +21,12 @@ export default function Login() {
 
     const loginHandler = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const { success } = await logInUser(loginCred);
         if (success) {
             successNotification('Login Successfull!!');
             navigate(state?.from ? state.from : '/', { replace: true });
+            setLoading(false);
         } else {
             errorNotification('Error Ocuured');
         }
@@ -31,10 +34,12 @@ export default function Login() {
 
     const loginAsGuest = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const { success } = await logInUser('johnsnow@dev.com', 'Password@123');
         if (success) {
             successNotification('Login Successfull!!');
             navigate(state?.from ? state.from : '/', { replace: true });
+            setLoading(false);
         } else {
             errorNotification('Error Ocuured');
         }
@@ -69,7 +74,11 @@ export default function Login() {
                             onClick={() => loginHandler()}
                             className={`btn btn-secondary ${styles.formBtn}`}
                         >
-                            Log in
+                            {isLoading ? (
+                                <i className="bx bx-loader-alt bx-spin"></i>
+                            ) : (
+                                'Log in'
+                            )}
                         </button>
                         <button
                             onClick={(e) => loginAsGuest(e)}
