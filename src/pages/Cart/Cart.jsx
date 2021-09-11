@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useData, useAuth } from '../../context';
@@ -15,6 +15,7 @@ export default function Cart() {
     const navigate = useNavigate();
     const { user } = useAuth();
     const { cartItems, wishListItems, dispatch } = useData();
+    const [isLoading, setLoading] = useState(false);
 
     const totalPrice = (items) => {
         return items.reduce(
@@ -77,30 +78,36 @@ export default function Cart() {
     });
 
     async function displayRazorpay() {
-        const { data } = await axios.post(`${BASE_URL}/cart/payment`, {
-            cartTotal
-        });
+        try {
+            setLoading(true);
+            const { data } = await axios.post(`${BASE_URL}/cart/payment`, {
+                cartTotal
+            });
 
-        const options = {
-            key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-            currency: data.currency,
-            amount: data.amount,
-            name: 'GardnUp',
-            description: 'Refresh Your Home Inside and Out',
-            order_id: data.id,
-            handler: function (response) {
-                alert('PAYMENT ID ::' + response.razorpay_payment_id);
-                alert('ORDER ID :: ' + response.razorpay_order_id);
-            },
-            prefill: {
-                name: user.name,
-                email: user.email,
-                contact: '9999999999'
-            }
-        };
+            const options = {
+                key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+                currency: data.currency,
+                amount: data.amount,
+                name: 'GardnUp',
+                description: 'Refresh Your Home Inside and Out',
+                order_id: data.id,
+                handler: function (response) {
+                    alert('PAYMENT ID ::' + response.razorpay_payment_id);
+                    alert('ORDER ID :: ' + response.razorpay_order_id);
+                },
+                prefill: {
+                    name: user.name,
+                    email: user.email,
+                    contact: '9999999999'
+                }
+            };
+            setLoading(false);
 
-        const paymentObject = new window.Razorpay(options);
-        paymentObject.open();
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
@@ -238,13 +245,22 @@ export default function Cart() {
                                         </ul>
                                     </div>
                                 </div>
-                                
-                                <button  onClick={displayRazorpay} className={`${styles.btnBlock}`}>
+
+                                <button
+                                    onClick={displayRazorpay}
+                                    className={`${styles.btnBlock}`}
+                                >
                                     <div>{cartTotal}</div>
-                                    <div className={`d-flex flex-align-center`}>
-                                        Checkout{' '}
-                                        <i className="bx bxs-right-arrow-alt h5"></i>
-                                    </div>
+                                    {isLoading ? (
+                                        <i class="bx bx-loader-alt bx-spin"></i>
+                                    ) : (
+                                        <div
+                                            className={`d-flex flex-align-center`}
+                                        >
+                                            Checkout{' '}
+                                            <i className="bx bxs-right-arrow-alt h5"></i>
+                                        </div>
+                                    )}
                                 </button>
                             </div>
                         </div>
