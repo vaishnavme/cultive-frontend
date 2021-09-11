@@ -7,7 +7,7 @@
     height: 3rem;
     padding: 1rem 2rem;
     background-color: var(--white);
-    z-index: 10;
+    z-index: 25;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;

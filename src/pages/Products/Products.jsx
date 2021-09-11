@@ -87,6 +87,9 @@ export default function Products() {
                 dispatch={dispatch}
             />
             <div className={`${styles.container}`}>
+                {filteredData.length === 0 && (
+                    <div className="h1 text-center">No Products</div>
+                )}
                 <div className={`${styles.productGrid} mt-4`}>
                     {filteredData &&
                         filteredData.map((product) => (

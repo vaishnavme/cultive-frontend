@@ -103,6 +103,7 @@ export const dataReducer = (state, { type, payload }) => {
                 inStock: false,
                 showInventoryAll: true,
                 categories: [],
+                sizeSelect: [],
                 rating: null,
                 sortBy: null
             };
